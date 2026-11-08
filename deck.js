@@ -436,9 +436,11 @@
     if (b) setTimeout(() => b.blur(), 0);
   }, true);
 
+  // un clic en el 40 % izquierdo de la pantalla retrocede; en el resto, avanza
+  const LEFT_ZONE = 0.4;
   addEventListener('click', (e) => {
     if (e.target.closest('a, button, .notes-modal')) return;
-    next();
+    if (e.clientX < innerWidth * LEFT_ZONE) prev(); else next();
     dismissHint();
   });
 
