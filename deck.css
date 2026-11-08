@@ -1,0 +1,213 @@
+/* ============================================================
+   Pitch ante jurados · presentación interactiva
+   deck.css  → tokens, escenario, sistema de revelado, HUD, piezas comunes
+   scenes.css → composición de cada escena
+   idle.css   → movimiento en reposo
+   Colores con significado: verde azulado = plataforma, azul = datos,
+   violeta = modelos, ámbar = lo que falta o sigue abierto.
+   ============================================================ */
+
+:root {
+  --bg: #f4f7f7;
+  --ink: #15222b;
+  --ink2: #34454f;
+  --muted: #64737d;
+  --line: #dfe6e8;
+  --line2: #c8d3d6;
+  --card: #ffffff;
+  --soft: #edf2f3;
+
+  --acc: #0f766e;
+  --acc-d: #0b5a54;
+  --acc-l: #2bb3a3;
+  --acc-s: #d8f1ed;
+  --acc-ss: #eef9f7;
+
+  --blue: #2563eb;
+  --blue-s: #e6eeff;
+  --ai: #5b4bdb;
+  --ai-s: #eeebff;
+  --warn: #9a5b00;
+  --warn-s: #fdf0cf;
+  --warn-l: #d9a400;
+  --red: #b42318;
+
+  --amb: 1;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --rv-tr: opacity .7s var(--ease), transform .85s var(--ease), filter .7s var(--ease);
+  --shadow-s: 0 1px 2px rgba(15, 34, 43, .05), 0 6px 16px rgba(15, 34, 43, .05);
+  --shadow-m: 0 2px 4px rgba(15, 34, 43, .05), 0 16px 36px rgba(15, 34, 43, .09);
+  --shadow-l: 0 4px 10px rgba(15, 34, 43, .08), 0 36px 70px rgba(15, 34, 43, .18);
+}
+
+body[data-theme="dark"] {
+  --bg: #091216;
+  --ink: #eef5f6;
+  --ink2: #c3d0d4;
+  --muted: #8a9ba2;
+  --line: #20303a;
+  --line2: #2f424d;
+  --card: #111d23;
+  --soft: #16242b;
+  --acc: #2bb3a3;
+  --acc-s: #12312e;
+  --acc-ss: #0f2724;
+  --blue-s: #14233f;
+  --ai-s: #1d1b3d;
+  --warn-s: #33280c;
+  --amb: .9;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color .9s var(--ease), color .9s var(--ease);
+}
+body.hide-cursor { cursor: none; }
+p, h1, h2, h3, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; }
+button { font: inherit; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ───────── fondo ambiente (idle) ───────── */
+.ambient { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: var(--amb); transition: opacity .9s var(--ease); }
+.ambient i { position: absolute; border-radius: 50%; }
+.ambient i:nth-child(1) { width: 820px; height: 820px; left: -14%; top: -30%; background: radial-gradient(circle, rgba(43, 179, 163, .26), rgba(43, 179, 163, 0) 66%); animation: drift1 38s ease-in-out infinite alternate; }
+.ambient i:nth-child(2) { width: 720px; height: 720px; right: -12%; bottom: -30%; background: radial-gradient(circle, rgba(37, 99, 235, .13), rgba(37, 99, 235, 0) 66%); animation: drift2 46s ease-in-out infinite alternate; }
+.ambient i:nth-child(3) { width: 600px; height: 600px; right: 20%; top: -34%; background: radial-gradient(circle, rgba(91, 75, 219, .10), rgba(91, 75, 219, 0) 66%); animation: drift3 54s ease-in-out infinite alternate; }
+@keyframes drift1 { to { transform: translate3d(140px, 90px, 0) scale(1.08); } }
+@keyframes drift2 { to { transform: translate3d(-120px, -70px, 0) scale(1.1); } }
+@keyframes drift3 { to { transform: translate3d(-90px, 80px, 0) scale(.92); } }
+
+/* pausa de color a mitad de la exposición: la escena de la propuesta se tiñe (verde azulado y ámbar) */
+.tintwash { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0; background: linear-gradient(135deg, rgba(43, 179, 163, .22), rgba(217, 164, 0, .16)); transition: opacity 1s var(--ease); }
+body[data-scene="s-propuesta"] .tintwash { opacity: 1; }
+html[data-print] .tintwash { display: none; }
+
+/* ───────── escenario 1280 × 720 escalado ───────── */
+.viewport { position: fixed; inset: 0; z-index: 1; }
+.stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1280px; height: 720px;
+  transform: translate(-50%, -50%) scale(var(--k, 1));
+  transform-origin: center center;
+  overflow: hidden;
+  font-size: 20px; line-height: 1.4;
+}
+
+.scene {
+  position: absolute; inset: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .5s var(--ease), visibility 0s linear .5s;
+}
+.scene.active { opacity: 1; visibility: visible; transition: opacity .6s var(--ease) .05s, visibility 0s; }
+.scene:not(.active) *, .scene:not(.active) *::before, .scene:not(.active) *::after { animation-play-state: paused !important; }
+
+/* ───────── sistema de revelado ───────── */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  filter: blur(5px);
+  transition: var(--rv-tr);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.rv.l { transform: translate3d(-30px, 0, 0); }
+.rv.r { transform: translate3d(44px, 0, 0); }
+.rv.z { transform: scale(.94); }
+.rv.f { transform: none; filter: none; }
+.rv.on { opacity: 1; transform: none; filter: none; }
+
+/* título dividido en letras */
+.split .ch { display: inline-block; opacity: 0; transform: translate3d(0, .42em, 0); filter: blur(6px);
+  transition: opacity .7s var(--ease), transform .9s var(--ease), filter .7s var(--ease);
+  transition-delay: calc(var(--c) * 34ms + 260ms); }
+.split.on .ch { opacity: 1; transform: none; filter: none; }
+
+/* ───────── piezas comunes ───────── */
+.hd { position: absolute; left: 72px; top: 52px; z-index: 5; }
+.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+.eyebrow::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: currentColor; }
+.h2 { font-size: 50px; font-weight: 800; letter-spacing: -.032em; line-height: 1.05; margin-top: 12px; }
+.lbl { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.big { font-size: 38px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.body { font-size: 19px; color: var(--ink2); line-height: 1.45; }
+.ac { color: var(--acc); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-s); }
+
+.i { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ico { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; flex: none; background: var(--acc-s); color: var(--acc-d); }
+body[data-theme="dark"] .ico { color: var(--acc); }
+.ico.ai { background: var(--ai-s); color: var(--ai); }
+.ico.blue { background: var(--blue-s); color: var(--blue); }
+.ico.warn { background: var(--warn-s); color: var(--warn); }
+
+/* ───────── movimiento en reposo (idle) ───────── */
+.float { animation: float 7s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: perspective(1400px) translate3d(0, 0, 0) rotateY(-3deg) rotateX(1deg) rotate(-.4deg); }
+  50% { transform: perspective(1400px) translate3d(0, -14px, 0) rotateY(3deg) rotateX(-1deg) rotate(.4deg); }
+}
+.bob { animation: bob 6.5s ease-in-out infinite; }
+.bob.b2 { animation-duration: 7.5s; animation-delay: -2.4s; }
+@keyframes bob { 0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); } 50% { transform: translate3d(0, -14px, 0) rotate(1deg); } }
+
+/* ───────── HUD ───────── */
+.hud { position: absolute; left: 0; right: 0; bottom: 0; height: 58px; padding: 0 40px; z-index: 30; display: flex; align-items: center; justify-content: space-between; font-size: 12px; letter-spacing: .03em; color: var(--muted); pointer-events: none; }
+.hud .brand b { color: var(--acc); font-weight: 700; }
+.hud .count { font-variant-numeric: tabular-nums; min-width: 74px; text-align: right; }
+.hud .ctl { display: flex; align-items: center; gap: 12px; pointer-events: auto; }
+.mode { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); opacity: .85; }
+.play { width: 28px; height: 28px; padding: 0; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line2); background: var(--card); color: var(--ink2); cursor: pointer; transition: background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
+.play .i { width: 13px; height: 13px; stroke-width: 2.4; fill: currentColor; }
+.play:hover { border-color: var(--acc); color: var(--acc); }
+.play.on { background: var(--acc); border-color: var(--acc); color: #fff; }
+.play:focus-visible, .back:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.back { display: none; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line2); background: var(--card); color: var(--ink2); font-size: 12px; font-weight: 600; cursor: pointer; pointer-events: auto; }
+.back kbd { font: inherit; font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--soft); color: var(--muted); }
+body[data-mode="backup"] .back { display: inline-flex; }
+body[data-mode="backup"] .brand, body[data-mode="backup"] #progress { display: none; }
+body:not([data-mode="backup"]) #progress-b { display: none; }
+.progress.b button { width: 48px; }
+.progress.b button span { position: absolute; left: 0; top: -12px; font-size: 10px; font-weight: 800; letter-spacing: .08em; color: var(--muted); }
+.progress { display: flex; gap: 6px; pointer-events: auto; position: absolute; left: 50%; transform: translateX(-50%); }
+.progress button { position: relative; width: 34px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; }
+.progress button::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 3px; border-radius: 3px; background: var(--line2); opacity: .7; transition: background-color .6s var(--ease); }
+.progress button i { position: absolute; left: 0; top: 9px; height: 3px; width: 0; border-radius: 3px; background: var(--acc); transition: width .6s var(--ease); }
+.progress button:hover::before { background: var(--muted); }
+.progress button:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 4px; }
+/* turnos: cada tramo toma el color de quien presenta (se asigna en deck.js, PRESENTER) */
+.progress button[data-who="A"]::before { background: rgba(15, 118, 110, .3); opacity: 1; }
+.progress button[data-who="A"] i { background: var(--acc); }
+.progress button[data-who="B"]::before { background: rgba(217, 119, 6, .3); opacity: 1; }
+.progress button[data-who="B"] i { background: #d97706; }
+
+.hint { position: absolute; left: 50%; bottom: 66px; transform: translate(-50%, 8px); z-index: 31; padding: 8px 16px; border-radius: 999px; background: rgba(14, 26, 32, .88); color: #fff; font-size: 13px; letter-spacing: .02em; opacity: 0; pointer-events: none; transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.hint.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ───────── movimiento: activo por defecto; ?motion=off o la tecla V lo reducen ───────── */
+html[data-motion="off"] .ambient i, html[data-motion="off"] .ambient .pt, html[data-motion="off"] .float, html[data-motion="off"] .bob,
+html[data-motion="off"] .scene *, html[data-motion="off"] .scene *::before, html[data-motion="off"] .scene *::after { animation: none !important; }
+html[data-motion="off"] .ambient .pt { display: none; }
+html[data-motion="off"] .rv, html[data-motion="off"] .split .ch { transform: none !important; filter: none !important; transition-duration: .3s !important; transition-delay: 0s !important; }
+
+/* etiqueta del modo: el modo manual se nota */
+.mode.manual { color: #b45309; opacity: 1; font-weight: 800; }
+body[data-theme="dark"] .mode.manual { color: #fbbf24; }
+
+/* ───────── modo impresión (?print=1): una escena por página, en su estado final ───────── */
+html[data-print] body { overflow: visible; height: auto; background: #fff; }
+html[data-print] .ambient, html[data-print] .hud, html[data-print] .hint, html[data-print] .notes-modal { display: none !important; }
+html[data-print] .viewport { position: static; }
+html[data-print] .stage { position: static; transform: none; height: auto; overflow: visible; width: 1280px; }
+html[data-print] .scene { position: relative; opacity: 1 !important; visibility: visible !important; width: 1280px; height: 720px; overflow: hidden; break-after: page; background: var(--bg); }
+html[data-print] .scene[data-theme="dark"] { --bg: #091216; --ink: #eef5f6; --ink2: #c3d0d4; --muted: #8a9ba2; --line: #20303a; --line2: #2f424d; --card: #111d23; --soft: #16242b; --acc: #2bb3a3; --acc-s: #12312e; --acc-ss: #0f2724; --blue-s: #14233f; --ai-s: #1d1b3d; --warn-s: #33280c; color: var(--ink); }
+html[data-print] *, html[data-print] *::before, html[data-print] *::after { animation: none !important; transition: none !important; }
+html[data-print] .rv, html[data-print] .split .ch { opacity: 1 !important; transform: none !important; filter: none !important; }
+@page { size: 1280px 720px; margin: 0; }

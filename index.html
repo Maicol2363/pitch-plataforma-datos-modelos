@@ -1,22 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plataforma reproducible de datos y despliegue de modelos - Slidev</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b5e8c'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="slidev:version" content="53.1.0">
-<meta property="og:title" content="Plataforma reproducible de datos y despliegue de modelos - Slidev">  <script type="module" crossorigin src="/pitch-plataforma-datos-modelos/assets/index-3ZljcVMj.js"></script>
-  <link rel="modulepreload" crossorigin href="/pitch-plataforma-datos-modelos/assets/rolldown-runtime-XKyaHtl9.js">
-  <link rel="modulepreload" crossorigin href="/pitch-plataforma-datos-modelos/assets/modules/shiki-C1mIlQpu.js">
-  <link rel="modulepreload" crossorigin href="/pitch-plataforma-datos-modelos/assets/modules/vue-CxWA10Zx.js">
-  <link rel="stylesheet" crossorigin href="/pitch-plataforma-datos-modelos/assets/modules/shiki-V4-KMA-J.css">
-  <link rel="stylesheet" crossorigin href="/pitch-plataforma-datos-modelos/assets/index-Dbz-_OpU.css">
+<title>Plataforma reproducible de datos y despliegue de modelos · Presentación</title>
+<meta name="description" content="Presentación ante jurados: plataforma reproducible de datos y despliegue de modelos para el monitoreo municipal de inseguridad alimentaria en Cundinamarca.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="deck.css">
+<link rel="stylesheet" href="scenes.css">
+<link rel="stylesheet" href="idle.css">
+<link rel="stylesheet" href="notes.css">
 </head>
-<body>
-  <div id="app"></div>
-  <div id="mermaid-rendering-container"></div>
-  
+<body data-theme="light">
+
+<!-- Iconos: trazo de 1.8 px, sin relleno. Se usan con <svg class="i"><use href="#i-..."/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 16.5l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17.2v.1"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="2"/><rect x="4" y="14" width="16" height="6" rx="2"/><path d="M8 7h.01M8 17h.01"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M15 15c3 0 6 1.4 6 4"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 10l3 2-3 2M12 15h5"/></symbol>
+  <symbol id="i-linkoff" viewBox="0 0 24 24"><path d="M10 14a4 4 0 010-6l2-2a4 4 0 016 0M14 10a4 4 0 010 6l-2 2a4 4 0 01-6 0"/><path d="M4 4l3 3M20 20l-3-3"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M5 21V5l7-2v18M12 8h7v13M5 21h14"/><path d="M8 8h1M8 12h1M8 16h1"/></symbol>
+  <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 01-12 0zM12 17v4"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 4l3 3-3 3M20 7H8a4 4 0 00-4 4M7 20l-3-3 3-3M4 17h12a4 4 0 004-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+</svg>
+
+<noscript><p style="position:fixed;inset:0;display:grid;place-items:center;margin:0;font-family:sans-serif">Esta presentación necesita JavaScript activado.</p></noscript>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="tintwash" aria-hidden="true"></div>
+
+<div class="viewport">
+<main class="stage" id="stage" aria-label="Presentación del proyecto">
+
+<!-- ═════════ 1 · PORTADA Y GANCHO ═════════ -->
+<section class="scene" id="s-portada" data-title="Portada">
+  <img class="cv-logo rv" data-s="0" src="assets/logo-universidad.jpg" alt="Universidad de Cundinamarca">
+
+  <div class="cv-main">
+    <div class="eyebrow rv" data-s="0" data-i="1">Proyecto de grado · monitoreo municipal</div>
+    <h1 class="cv-title rv f split" data-s="0" data-i="2">Plataforma <span class="ac">reproducible</span> de datos y despliegue de modelos</h1>
+    <p class="cv-sub rv" data-s="0" data-i="8">para el monitoreo municipal de inseguridad alimentaria en Cundinamarca</p>
+    <ul class="team rv" data-s="0" data-i="9">
+      <li>David Fernando Gonzalez Soler</li>
+      <li>Maycol Estiven Fonseca Muñoz</li>
+      <li><small>Pre-director: Harvey Iovani Hernández Yomayusa</small></li>
+    </ul>
+  </div>
+  <p class="cv-meta rv" data-s="0" data-i="10">Ingeniería de Sistemas y Computación · Facatativá<br>Universidad de Cundinamarca</p>
+
+  <div class="cv-art">
+    <div class="rv z" data-s="0" data-i="4">
+      <div class="float">
+        <div class="hook-card card">
+          <div class="lbl">Cundinamarca · hogares con inseguridad alimentaria moderada o grave</div>
+          <div class="hk-bars">
+            <div class="hk-bar"><span class="v" id="v24">22,6 %</span><div class="b" style="height:170px"></div><span class="y">2024</span></div>
+            <div class="hk-bar now"><span class="v" id="v25">13,1 %</span><div class="b" style="height:99px"></div><span class="y">2025</span></div>
+            <div class="hk-delta">−9,5 puntos<small>diferencia significativa</small></div>
+          </div>
+          <div class="hk-sep"></div>
+          <div class="lbl">Estimaciones municipales publicadas</div>
+          <div class="yrs">
+            <div class="yr">2022<small>publicada</small></div>
+            <div class="yr gap">2023<u>?</u></div>
+            <div class="yr">2024<small>publicada</small></div>
+            <div class="yr gap">2025<u>?</u></div>
+          </div>
+          <p class="hk-src">Fuente: DANE, boletín FIES 2025, Gráfico 4 (p. 6) · municipal: página de estadísticas experimentales del DANE</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 2 · POR QUÉ IMPORTA ═════════ -->
+<section class="scene" id="s-porque" data-title="Por qué importa" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">El nivel que falta</div><h2 class="h2">La encuesta llega hasta el departamento</h2></header>
+
+  <div class="fies">
+    <div class="fies-card card rv" data-s="0">
+      <div class="lbl">Escala FIES · ECV</div>
+      <div class="q8"><i style="--n:0"></i><i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i></div>
+      <div class="big"><span class="ac">8</span> preguntas, <span class="ac">cada año</span></div>
+      <div class="yearline"><b></b><span></span><b></b><span></span><b></b><span></span><b></b></div>
+      <div class="yearline-l"><span>2022</span><span>2023</span><span>2024</span><span>2025</span></div>
+    </div>
+    <div class="pq-row rv" data-s="1">
+      <div class="pq"><div class="ico blue"><svg class="i"><use href="#i-home"/></svg></div><div><b>Hogares</b><span>las cifras del boletín</span></div></div>
+      <div class="pq-ne">≠</div>
+      <div class="pq"><div class="ico"><svg class="i"><use href="#i-user"/></svg></div><div><b>Personas</b><span>indicador 2.1.2 del ODS 2</span></div></div>
+    </div>
+  </div>
+
+  <div class="zoom">
+    <div class="zoom-card card rv z" data-s="0" data-i="2">
+      <div class="lbl">La encuesta publica un número por departamento</div>
+      <div class="dept"><div><b>Cundinamarca</b><span>un solo valor por departamento</span></div></div>
+      <div class="mdots rv f" data-s="2" id="mdots"></div>
+      <div class="zoom-cap rv f" data-s="2"><span class="tag">Estimación en áreas pequeñas · 2022 y 2024</span><b>116 municipios</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 3 · PROBLEMA OPERATIVO ═════════ -->
+<section class="scene" id="s-problema" data-title="El problema es operativo" data-steps="6">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">El problema</div><h2 class="h2">Cinco dificultades, un problema operativo</h2></header>
+
+  <div class="dfs">
+    <div class="dfr rv" data-s="1">
+      <div class="df"><span class="n">1</span>Fuentes heterogéneas</div>
+      <div class="lane"><span class="fchip">API abierta</span><span class="fchip f2">Archivo publicado</span><span class="fchip f3">Inicio de sesión</span></div>
+    </div>
+    <div class="dfr rv" data-s="2">
+      <div class="df"><span class="n">2</span>Períodos y frecuencias distintos</div>
+      <div class="lane per"><div class="trk"><div class="row r1" id="trk1"><em>BLACK MARBLE</em></div><div class="row r2" id="trk2"><em>FIES MUNICIPAL</em></div><span class="scan"></span></div></div>
+    </div>
+    <div class="dfr rv" data-s="3">
+      <div class="df"><span class="n">3</span>Condiciones de acceso diferentes</div>
+      <div class="lane lk"><svg class="i"><use href="#i-lock"/></svg><span><b>Sisbén</b> · tratamiento protegido de datos personales</span></div>
+    </div>
+    <div class="dfr rv" data-s="4">
+      <div class="df"><span class="n">4</span>Requisitos y vigencia de cada modelo</div>
+      <div class="lane ver"><b class="old">v1</b><b class="old">v2</b><b>v3</b><span>¿sigue vigente con datos nuevos?</span></div>
+    </div>
+    <div class="dfr rv" data-s="5">
+      <div class="df"><span class="n">5</span>Procedencia incompleta y pasos manuales</div>
+      <div class="lane chain"><b>datos</b><span class="brk"><svg class="i"><use href="#i-linkoff"/></svg></span><b class="m">modelo</b><span class="q">¿qué versión produjo este resultado?</span></div>
+    </div>
+  </div>
+
+  <div class="takeaway rv" data-s="6"><svg class="i"><use href="#i-spark"/></svg><p>No medimos inseguridad alimentaria ni proponemos un algoritmo nuevo: falta un proceso reproducible.</p></div>
+</section>
+
+<!-- ═════════ 4 · LO QUE EXISTE Y EL VACÍO ═════════ -->
+<section class="scene" id="s-vacio" data-title="Qué existe y dónde está el vacío" data-steps="3">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Estado del arte</div><h2 class="h2">Cada pieza existe por separado</h2></header>
+
+  <div class="vcs">
+    <div class="vc rv z" data-s="0">
+      <div class="ico blue"><svg class="i"><use href="#i-layers"/></svg></div>
+      <h3>Herramientas generales</h3><div class="sub">p. ej. MLflow, DVC</div>
+      <ul>
+        <li><svg class="i"><use href="#i-check"/></svg>Versionado de datos y modelos</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Registro de versiones</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Contratos de entrada y salida</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Servicio por API</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Incorporación de datos<em>parte</em></li>
+      </ul>
+    </div>
+    <div class="vc rv z" data-s="1">
+      <div class="ico"><svg class="i"><use href="#i-globe"/></svg></div>
+      <h3>Para datos colombianos</h3><div class="sub">adquisición y homologación</div>
+      <ul>
+        <li><svg class="i"><use href="#i-check"/></svg>Adquisición<em>parte</em></li>
+        <li><svg class="i"><use href="#i-check"/></svg>Homologación<em>parte</em></li>
+      </ul>
+    </div>
+    <div class="vc gap rv z" data-s="2">
+      <div class="ico warn"><svg class="i"><use href="#i-search"/></svg></div>
+      <h3>Sin identificar</h3><div class="sub">en las fuentes revisadas</div>
+      <ul>
+        <li><svg class="i"><use href="#i-alert"/></svg>Compatibilidad dataset–modelo</li>
+        <li><svg class="i"><use href="#i-alert"/></svg>Procedencia por resultado</li>
+        <li><svg class="i"><use href="#i-alert"/></svg>Para datos municipales de Colombia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="vnote rv f" data-s="3"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Hipótesis de trabajo, acotada a las fuentes revisadas</span></div>
+</section>
+
+<!-- ═════════ 5 · PROPUESTA ═════════ -->
+<section class="scene" id="s-propuesta" data-title="Nuestra propuesta" data-steps="6" data-theme-hint="tint">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Propuesta</div><h2 class="h2">Una plataforma, cuatro objetivos</h2></header>
+
+  <div class="pipe">
+    <div class="lk2 rv f" data-s="1" style="left:154px"><span class="dot"></span><span class="dot d2"></span></div>
+    <div class="lk2 rv f" data-s="2" style="left:350px"><span class="dot"></span><span class="dot d2"></span></div>
+    <div class="lk2 rv f" data-s="3" style="left:546px"><span class="dot"></span><span class="dot d2"></span></div>
+    <div class="lk2 rv f" data-s="4" style="left:742px"><span class="dot"></span><span class="dot d2"></span></div>
+    <div class="lk2 rv f" data-s="5" style="left:938px"><span class="dot"></span><span class="dot d2"></span></div>
+
+    <div class="pn rv z" data-s="0" style="left:0"><div class="ico blue"><svg class="i"><use href="#i-db"/></svg></div><h3>Fuentes públicas</h3><p>API, archivo o inicio de sesión</p></div>
+    <div class="pn rv z" data-s="1" style="left:196px"><div class="ico blue"><svg class="i"><use href="#i-layers"/></svg></div><span class="ver-b">v2024.1</span><h3>Dataset versionado</h3><p>cada versión, inmutable</p></div>
+    <div class="pn rv z" data-s="2" style="left:392px"><div class="ico"><svg class="i"><use href="#i-shield"/></svg></div><h3>Compatibilidad</h3><p>se comprueba antes de ejecutar</p></div>
+    <div class="pn rv z" data-s="3" style="left:588px"><div class="ico ai"><svg class="i"><use href="#i-cpu"/></svg></div><h3>Ejecución aislada</h3><p>cada modelo, por separado</p></div>
+    <div class="pn rv z" data-s="4" style="left:784px"><div class="ico"><svg class="i"><use href="#i-plug"/></svg></div><h3>API</h3><p>consulta de resultados</p></div>
+    <div class="pn rv z" data-s="5" style="left:980px"><div class="ico"><svg class="i"><use href="#i-receipt"/></svg></div><h3>Resultado</h3><p>con su procedencia</p></div>
+  </div>
+
+  <div class="prov rv f" data-s="5"><span class="lbl">Procedencia de cada resultado</span><span class="chip-p m">Modelo v3</span><span class="chip-p d">Datos v2024.1</span><span class="chip-p p">Período</span></div>
+
+  <div class="objs">
+    <div class="obj-chip rv z" data-s="6"><div class="ico"><svg class="i"><use href="#i-layers"/></svg></div><div><small>1</small>Arquitectura modular</div></div>
+    <div class="obj-chip rv z" data-s="6" data-i="1"><div class="ico blue"><svg class="i"><use href="#i-db"/></svg></div><div><small>2</small>Ingesta y homologación</div></div>
+    <div class="obj-chip rv z" data-s="6" data-i="2"><div class="ico ai"><svg class="i"><use href="#i-plug"/></svg></div><div><small>3</small>Despliegue y API</div></div>
+    <div class="obj-chip rv z" data-s="6" data-i="3"><div class="ico"><svg class="i"><use href="#i-check-circle"/></svg></div><div><small>4</small>Validación con un caso de demostración</div></div>
+  </div>
+  <div class="propnote rv f" data-s="6"><span class="pill"><svg class="i"><use href="#i-target"/></svg>116 municipios · modelos ya entrenados · sin entrenamiento en la primera versión</span></div>
+</section>
+
+<!-- ═════════ 6 · CÓMO FUNCIONA ═════════ -->
+<section class="scene" id="s-funciona" data-title="Cómo funciona" data-steps="3">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Diseño</div><h2 class="h2">Datos, modelos y acceso</h2></header>
+
+  <div class="grps">
+    <div class="grp dt rv z" data-s="0"><div class="gh"><div class="ico blue"><svg class="i"><use href="#i-db"/></svg></div><b>Datos</b></div><div class="bl"><span>Ingesta</span><span>Preparación y calidad</span><span>Almacén versionado</span></div></div>
+    <div class="grp md rv z" data-s="0" data-i="1"><div class="gh"><div class="ico ai"><svg class="i"><use href="#i-cpu"/></svg></div><b>Modelos</b></div><div class="bl"><span>Registro</span><span>Compatibilidad</span><span>Ejecución aislada</span></div></div>
+    <div class="grp ac rv z" data-s="0" data-i="2"><div class="gh"><div class="ico"><svg class="i"><use href="#i-plug"/></svg></div><b>Acceso y procedencia</b></div><div class="bl"><span>API</span><span>Interfaz web</span><span>Catálogo de procedencia</span></div></div>
+  </div>
+
+  <div class="demo">
+    <div class="gt rv f" data-s="1">
+      <div class="cap">Comprobación de compatibilidad</div>
+      <div class="stream">
+        <div class="gate-line"></div>
+        <i class="mun" style="--r:0;--n:0"></i><i class="mun" style="--r:1;--n:1"></i><i class="mun bad" style="--r:2;--n:2"></i><i class="mun" style="--r:3;--n:3"></i><i class="mun" style="--r:4;--n:4"></i><i class="mun bad" style="--r:5;--n:5"></i><i class="mun" style="--r:6;--n:6"></i>
+        <span class="why">excluido: fuera de cobertura</span>
+      </div>
+      <div class="mnote" style="position:absolute;left:0;top:268px">Los municipios válidos pasan; el resto se excluye con su motivo.</div>
+    </div>
+    <div class="mlanes rv f" data-s="2">
+      <div class="ml ok"><div class="ico ai"><svg class="i"><use href="#i-cpu"/></svg></div><div>Modelo A<small>corre aislado</small></div><span class="tick"><svg class="i" style="width:16px;height:16px"><use href="#i-check"/></svg></span></div>
+      <div class="ml fail"><div class="ico warn"><svg class="i"><use href="#i-cpu"/></svg></div><div>Modelo B<small>falla</small></div><span class="x"><svg class="i" style="width:16px;height:16px"><use href="#i-x"/></svg></span></div>
+      <div class="mnote">Si uno falla, los demás siguen.</div>
+    </div>
+    <div class="rs rv z" data-s="3">
+      <div class="ico"><svg class="i"><use href="#i-receipt"/></svg></div>
+      <h3>Estimación de un modelo</h3><p>no es una cifra oficial</p>
+      <div class="chips"><span class="chip-p p">Período</span><span class="chip-p d">Versión de datos</span><span class="chip-p m">Versión de modelo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 7 · ROLES Y ALCANCE ═════════ -->
+<section class="scene" id="s-alcance" data-title="Quién la usa y qué alcance tiene" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Quién la usa</div><h2 class="h2">Dos roles, alcance por niveles</h2></header>
+
+  <div class="roles">
+    <div class="role rv z" data-s="0"><div class="rh"><div class="ico"><svg class="i"><use href="#i-cog"/></svg></div><h3>Administrador</h3></div><div class="acts"><span>Configura fuentes</span><span>Activa versiones</span><span>Registra modelos</span></div></div>
+    <div class="role rv z" data-s="0" data-i="1"><div class="rh"><div class="ico blue"><svg class="i"><use href="#i-search"/></svg></div><h3>Investigador</h3></div><div class="acts"><span>Elige datos y modelos</span><span>Ejecuta</span><span>Consulta procedencia</span></div></div>
+  </div>
+
+  <div class="tiers">
+    <div class="tier must rv" data-s="1"><div class="lab">Debe</div><div class="fillb"><span>≥ 3 fuentes heterogéneas</span><span>2 familias de modelos</span><span>Compatibilidad</span><span>API</span><span>Procedencia</span><span>Instalación en limpio</span></div></div>
+    <div class="tier should rv" data-s="1" data-i="1"><div class="lab">Debería</div><div class="fillb"><span>Interfaz web delgada</span><span>Exportación</span><span>Historial con repetición</span></div></div>
+    <div class="tier could rv" data-s="1" data-i="2"><div class="lab">Podría</div><div class="fillb"><span>Reentrenamiento</span><span>Más fuentes</span><span>Más pantallas</span></div></div>
+  </div>
+
+  <div class="out rv f" data-s="2"><span class="lbl">Fuera de la primera versión</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Entrenar en la plataforma</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Personal municipal como usuario</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Operación permanente</span></div>
+  <div class="cmd rv z" data-s="2" data-i="2"><svg class="i"><use href="#i-terminal"/></svg><span><i>$</i> <b>docker compose up</b></span><small>una instalación, un comando, en un entorno limpio</small></div>
+</section>
+
+<!-- ═════════ 8 · LO ESPECIFICADO ═════════ -->
+<section class="scene" id="s-especificado" data-title="Lo investigado y especificado" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Especificación</div><h2 class="h2">Ya está especificado</h2></header>
+  <div class="ieee rv z" data-s="0" data-i="2">IEEE 830</div>
+
+  <div class="tiles">
+    <div class="tile t1 rv z" data-s="0"><b class="n" id="n48">0</b><span>requisitos funcionales</span><em>según la norma IEEE 830</em>
+      <div class="split-bar"><i class="e"></i><i class="c"></i></div>
+      <div class="split-leg"><span class="e">38 esenciales</span><span class="c">10 condicionales</span></div></div>
+    <div class="tile t2 rv z" data-s="1"><b class="n" id="n17">0</b><span>requisitos no funcionales</span></div>
+    <div class="tile t3 rv z" data-s="1" data-i="1"><b class="n" id="n11">0</b><span>casos de uso</span><em>2 roles</em></div>
+    <div class="tile t4 rv z" data-s="2"><b class="n" id="n5">0</b><span>ejes de estado del arte</span><div class="axes"><b style="--n:0">A</b><b style="--n:1">B</b><b style="--n:2">C</b><b style="--n:3">D</b><b style="--n:4">E</b></div></div>
+  </div>
+  <div class="specnote rv f" data-s="2"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Diseño y especificación · aún sin versión en ejecución</span></div>
+</section>
+
+<!-- ═════════ 9 · MÉTODO, PLAN Y ABIERTOS ═════════ -->
+<section class="scene" id="s-metodo" data-title="Método, plan y puntos abiertos" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Método y plan</div><h2 class="h2">Cuatro fases y puntos abiertos</h2></header>
+
+  <div class="mtrack rv f" data-s="0" data-i="1">
+    <div class="tr"><i><b class="orb"></b><b class="orb o2"></b></i></div>
+    <div class="mcols">
+      <div class="mcol"><div class="node"><b>1</b></div><b class="ph">Diseño</b><span class="ob">arquitectura modular</span></div>
+      <div class="mcol"><div class="node"><b>2</b></div><b class="ph">Ingesta y homologación</b><span class="ob">116 municipios</span></div>
+      <div class="mcol"><div class="node"><b>3</b></div><b class="ph">Registro, compatibilidad y API</b><span class="ob">despliegue versionado</span></div>
+      <div class="mcol"><div class="node"><b>4</b></div><b class="ph">Validación</b><span class="ob">caso de demostración</span></div>
+    </div>
+  </div>
+
+  <div class="wk-box rv f" data-s="0" data-i="3"><div class="wk-l">Cronograma de referencia: 40 semanas<span>horizonte estimado: dos a tres semestres</span></div><div class="wk" id="wk"></div></div>
+
+  <div class="risks rv f" data-s="1">
+    <span class="risk"><svg class="i"><use href="#i-shield"/></svg>Cobertura de los 116</span>
+    <span class="risk"><svg class="i"><use href="#i-shield"/></svg>Períodos que no coinciden</span>
+    <span class="risk"><svg class="i"><use href="#i-shield"/></svg>Acceso, como el Sisbén</span>
+    <span class="arr">→</span>
+    <span class="mit">fuentes de acceso público confirmado · modelos de referencia propios</span>
+  </div>
+
+  <div class="opens rv f" data-s="2">
+    <div class="lbl">Seguimos abiertos en</div>
+    <div class="open-grid">
+      <span class="open-chip"><b class="q">?</b>Duración formal</span>
+      <span class="open-chip"><b class="q">?</b>Alcance de 116 y línea translocal</span>
+      <span class="open-chip"><b class="q">?</b>Admisibilidad como monografía</span>
+      <span class="open-chip"><b class="q">?</b>Indicador exacto del caso</span>
+      <span class="open-chip"><b class="q">?</b>Herramienta de registro de modelos</span>
+      <span class="open-chip"><b class="q">?</b>Validación con investigadores reales</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 10 · IMPACTO Y CIERRE ═════════ -->
+<section class="scene" id="s-cierre" data-theme="dark" data-title="Impacto y cierre" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Cierre</div><h2 class="h2">Impacto condicional</h2></header>
+
+  <div class="cc rv f" data-s="0" data-i="1">
+    <div class="ringc"></div>
+    <div class="orbit"><i></i></div>
+    <div class="core"><span>Un proceso reproducible y trazable</span></div>
+    <div class="cn n1"><b><svg class="i"><use href="#i-globe"/></svg>Social</b><small class="rv f" data-s="1">podría apoyar el análisis territorial</small></div>
+    <div class="cn n2"><b><svg class="i"><use href="#i-building"/></svg>Institucional</b><small class="rv f" data-s="1" data-i="1">dejaría una base que los semilleros podrían reutilizar</small></div>
+    <div class="cn n3"><b><svg class="i"><use href="#i-cog"/></svg>Tecnológico</b><small class="rv f" data-s="1" data-i="2">registrar y ejecutar modelos sin rehacer la ingesta</small></div>
+    <div class="cn n4"><b><svg class="i"><use href="#i-book"/></svg>Académico</b><small class="rv f" data-s="1" data-i="3">facilitaría revisar y repetir resultados</small></div>
+  </div>
+
+  <div class="endnote rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-alert"/></svg>Estimaciones de modelos, no cifras oficiales del DANE</span></div>
+  <div class="thanks rv f" data-s="2" data-i="1"><span class="ap">Gracias.</span> Preguntas.</div>
+</section>
+
+<!-- ═════════ RESPALDOS A–F ═════════ -->
+<section class="scene bk" id="s-resp-a" data-group="backup" data-title="Respaldo A · MLflow y DVC" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo A</div><h2 class="h2">¿Por qué no MLflow y DVC?</h2></header>
+  <div class="bk-wrap">
+    <div class="cmp">
+      <div class="bk-card yes rv z" data-s="0"><div class="ico"><svg class="i"><use href="#i-layers"/></svg></div><h3>Lo que ya registran</h3><ul><li><svg class="i"><use href="#i-check"/></svg>Versionado de modelos y datos</li><li><svg class="i"><use href="#i-check"/></svg>Registro de versiones</li></ul></div>
+      <div class="bk-card no rv z" data-s="1"><div class="ico warn"><svg class="i"><use href="#i-alert"/></svg></div><h3>En lo revisado, no cubren</h3><ul><li><svg class="i"><use href="#i-x"/></svg>Adquisición de datos públicos municipales</li><li><svg class="i"><use href="#i-x"/></svg>Compatibilidad contra un dataset versionado</li></ul></div>
+    </div>
+    <div class="bk-foot rv f" data-s="2"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>La herramienta de registro de modelos sigue abierta</span></div>
+  </div>
+</section>
+
+<section class="scene bk" id="s-resp-b" data-group="backup" data-title="Respaldo B · Por qué una plataforma" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo B</div><h2 class="h2">¿Por qué una plataforma para 116 municipios?</h2></header>
+  <div class="bk-wrap">
+    <div class="split2">
+      <div class="cyc rv z" data-s="0"><span class="runner"></span><span class="stop s1">Cada año</span><span class="stop s2">Más fuentes</span><span class="stop s3">Más modelos</span><span class="stop s4">Más personas</span><div class="mid">Su valor aparece al repetir</div></div>
+      <div class="txt">
+        <p class="bk-big rv f" data-s="1">Para una sola corrida bastaría un cuaderno versionado.</p>
+        <p class="pill warn rv f" data-s="2" style="justify-self:start"><svg class="i"><use href="#i-alert"/></svg>No prometemos ahorros: no están medidos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene bk" id="s-resp-c" data-group="backup" data-title="Respaldo C · Quién la usa" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo C</div><h2 class="h2">¿Quién la usa?</h2></header>
+  <div class="bk-wrap">
+    <div class="split2">
+      <div class="rings rv z" data-s="0"><div class="rg out2"><span class="rv f" data-s="1" style="position:absolute;top:34px;left:0;right:0">Equipos técnicos municipales · indirectos, a mediano o largo plazo</span></div><div class="rg in2">Investigadores, analistas y semilleros<br><small style="font-weight:600;opacity:.8">usuarios directos</small></div></div>
+      <div class="txt">
+        <p class="bk-big rv f" data-s="1">Los equipos municipales son beneficiarios indirectos, fuera de la primera versión.</p>
+        <p class="pill warn rv f" data-s="2" style="justify-self:start"><svg class="i"><use href="#i-alert"/></svg>Validación con investigadores reales: pendiente</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene bk" id="s-resp-d" data-group="backup" data-title="Respaldo D · Calidad de las predicciones" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo D</div><h2 class="h2">¿Qué tan buenas son las predicciones?</h2></header>
+  <div class="bk-wrap">
+    <div class="cmp">
+      <div class="bk-card yes rv z" data-s="0"><div class="ico"><svg class="i"><use href="#i-check-circle"/></svg></div><h3>Se evalúa: la plataforma</h3><div class="crit"><span>Integración</span><span>Trazabilidad</span><span>Reproducibilidad</span><span>Despliegue</span><span>Usabilidad</span></div></div>
+      <div class="vs rv f" data-s="1">≠</div>
+      <div class="bk-card dash rv z" data-s="1"><div class="ico ai"><svg class="i"><use href="#i-cpu"/></svg></div><h3>Se distingue: el desempeño del modelo</h3><p class="body">Es propio de los modelos que se integren, no de la plataforma.</p></div>
+    </div>
+    <div class="bk-foot rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-alert"/></svg>Los resultados son estimaciones de modelos, no cifras oficiales</span></div>
+  </div>
+</section>
+
+<section class="scene bk" id="s-resp-e" data-group="backup" data-title="Respaldo E · Viabilidad" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo E</div><h2 class="h2">¿Es viable para dos personas?</h2></header>
+  <div class="bk-wrap">
+    <div class="tiers" style="position:static;width:auto">
+      <div class="tier must rv" data-s="0" style="height:84px"><div class="lab">Debe</div><div class="fillb"><span>Lo que la demostración necesita</span></div></div>
+      <div class="tier should rv" data-s="0" data-i="1" style="height:84px"><div class="lab">Debería</div><div class="fillb"><span>Interfaz web delgada, exportación, historial</span></div></div>
+      <div class="tier could rv" data-s="0" data-i="2" style="height:84px"><div class="lab">Podría</div><div class="fillb"><span>Reentrenamiento, más fuentes, más pantallas</span></div></div>
+    </div>
+    <div class="bk-foot">
+      <span class="pill rv z" data-s="1"><svg class="i"><use href="#i-target"/></svg>La primera versión no entrena modelos</span>
+      <span class="pill warn rv z" data-s="2"><svg class="i"><use href="#i-clock"/></svg>Horizonte estimado: dos a tres semestres · duración formal en revisión</span>
+    </div>
+  </div>
+</section>
+
+<section class="scene bk" id="s-resp-f" data-group="backup" data-title="Respaldo F · Hogares o personas" data-steps="2">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo F</div><h2 class="h2">¿Hogares o personas? ¿Qué cifra citamos?</h2></header>
+  <div class="bk-wrap">
+    <div class="cmp">
+      <div class="bk-card yes rv z" data-s="0"><div class="ico blue"><svg class="i"><use href="#i-home"/></svg></div><h3>Boletín del DANE · hogares</h3><p class="fig">13,1 %<small>2025</small></p><p class="fig" style="margin-top:8px;color:var(--muted)">22,6 %<small>2024</small></p><p class="body" style="margin-top:12px">Gráfico 4, p. 6</p></div>
+      <div class="vs rv f" data-s="1">≠</div>
+      <div class="bk-card dash rv z" data-s="1"><div class="ico"><svg class="i"><use href="#i-user"/></svg></div><h3>Indicador 2.1.2 del ODS 2 · personas</h3><p class="body">El boletín lo separa de las cifras de hogares.</p></div>
+    </div>
+    <div class="bk-foot rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-file"/></svg>Citamos solo el boletín del DANE, con su gráfico y su página</span></div>
+  </div>
+</section>
+
+<!-- ═════════ NOTAS DE ESTUDIO (tecla N) ═════════ -->
+<aside class="notes-modal" id="notes" role="dialog" aria-label="Notas de estudio" aria-hidden="true">
+  <header>
+    <span class="nt-k">Notas de estudio</span>
+    <b id="nt-title"></b>
+    <span class="nt-time" id="nt-time"></span>
+    <span class="nt-step" id="nt-step"></span>
+    <button type="button" id="nt-close" aria-label="Cerrar notas (N)">×</button>
+  </header>
+  <div class="nt-body" id="nt-body"></div>
+</aside>
+
+<!-- ═════════ HUD ═════════ -->
+<div class="hud">
+  <span class="brand"><b>Plataforma reproducible</b> · Universidad de Cundinamarca</span>
+  <button class="back" id="back" type="button">← Volver a la presentación <kbd>Esc</kbd></button>
+  <nav class="progress" id="progress" aria-label="Progreso de la presentación"></nav>
+  <nav class="progress b" id="progress-b" aria-label="Respaldo"></nav>
+  <span class="ctl">
+    <span class="mode" id="mode">auto</span>
+    <button class="play" id="play" type="button" aria-label="Recorrido automático (Mayús+P)" title="Recorrido automático (Mayús+P)"><svg class="i"><use id="play-use" href="#i-play"/></svg></button>
+    <span class="count" id="count">01 / 10</span>
+  </span>
+</div>
+<div class="hint" id="hint">→ avanzar · A–F respaldo · V movimiento · F pantalla completa</div>
+
+</main>
+</div>
+
+<div class="sr" id="live" aria-live="polite"></div>
+<script src="deck.js"></script>
+<script src="scenes.js"></script>
 </body>
 </html>

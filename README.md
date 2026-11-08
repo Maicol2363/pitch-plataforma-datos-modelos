@@ -1,5 +1,5 @@
 # Pitch: plataforma reproducible de datos y despliegue de modelos
 
-Diapositivas del pitch del proyecto «Plataforma reproducible de datos y despliegue de modelos para el monitoreo municipal de inseguridad alimentaria en Cundinamarca» (Universidad de Cundinamarca, extensión Facatativá).
+Presentación interactiva del proyecto «Plataforma reproducible de datos y despliegue de modelos para el monitoreo municipal de inseguridad alimentaria en Cundinamarca» (Universidad de Cundinamarca, extensión Facatativá).
 
-Sitio estático generado con Slidev. Se navega con las flechas del teclado.
+Archivos estáticos (HTML, CSS y JavaScript), sin dependencias. Teclas: `→` avanza, `←` retrocede, `A`–`F` abren los respaldos y `Esc` vuelve, `Mayús+P` hace el recorrido automático, `V` activa o reduce el movimiento y `F` pone pantalla completa.
