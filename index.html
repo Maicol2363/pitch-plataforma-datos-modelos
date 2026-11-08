@@ -97,6 +97,12 @@
       </div>
     </div>
   </div>
+  <template class="notes" data-time="0:45" data-key="La cifra oficial es departamental y de hogares; del municipio solo hay estimaciones de 2022 y 2024.">
+    <p data-s="0">[Buenos días / buenas tardes], jurados. Somos [nombre de A] y [nombre de B]; presentamos nuestro proyecto de grado.</p>
+    <p data-s="0">En 2025 el DANE midió que el 13,1 % de los hogares de Cundinamarca estaba en inseguridad alimentaria moderada o grave. En 2024 era el 22,6 %: 9,5 puntos menos en un año, y el DANE reporta la diferencia como estadísticamente significativa.</p>
+    <p data-s="0">Esa cifra es departamental y de hogares. Para los municipios, el DANE publica estimaciones solo de 2022 y 2024. Nuestro proyecto parte de ahí. Programa de Ingeniería de Sistemas y Computación, Universidad de Cundinamarca, extensión Facatativá.</p>
+    <p class="tr">Eso nos lleva a por qué importa el nivel municipal.</p>
+  </template>
 </section>
 
 <!-- ═════════ 2 · POR QUÉ IMPORTA ═════════ -->
@@ -126,6 +132,12 @@
       <div class="zoom-cap rv f" data-s="2"><span class="tag">Estimación en áreas pequeñas · 2022 y 2024</span><b>116 municipios</b></div>
     </div>
   </div>
+  <template class="notes" data-time="0:40" data-key="El indicador se mide cada año, pero la encuesta llega hasta el departamento; el municipio se cubre con estimación en áreas pequeñas.">
+    <p data-s="0">De FIES solo recordamos lo que usamos: ocho preguntas de la Encuesta Nacional de Calidad de Vida, incluidas desde 2022 y aplicadas cada año.</p>
+    <p data-s="1">El indicador 2.1.2 del ODS 2 se define para personas. Por eso el boletín del DANE lo separa de las cifras de hogares que acabamos de ver.</p>
+    <p data-s="2">Por el diseño de la encuesta, los indicadores se desagregan hasta el departamento. El DANE identificó la necesidad de información municipal y la cubre con estimación en áreas pequeñas, que combina la encuesta con información auxiliar, para 2022 y 2024. Cundinamarca tiene 116 municipios; la información a ese nivel es limitada y menos frecuente.</p>
+    <p class="tr">Producir esas estimaciones exige reunir fuentes muy distintas, y de ahí sale el problema.</p>
+  </template>
 </section>
 
 <!-- ═════════ 3 · PROBLEMA OPERATIVO ═════════ -->
@@ -156,6 +168,16 @@
   </div>
 
   <div class="takeaway rv" data-s="6"><svg class="i"><use href="#i-spark"/></svg><p>No medimos inseguridad alimentaria ni proponemos un algoritmo nuevo: falta un proceso reproducible.</p></div>
+  <template class="notes" data-time="1:20" data-key="No medimos inseguridad alimentaria ni proponemos un algoritmo: falta un proceso reproducible que una datos, modelos y resultados con su procedencia.">
+    <p data-s="0">Producir estimaciones municipales exige reunir fuentes muy distintas. Lo resumimos en cinco dificultades.</p>
+    <p data-s="1">Fuentes heterogéneas, con esquemas, códigos y formatos propios: unas por API abierta, otras archivos publicados, otras con inicio de sesión.</p>
+    <p data-s="2">Períodos y frecuencias que no coinciden: Black Marble publica versiones diarias, mensuales y anuales; las estimaciones municipales de FIES, solo 2022 y 2024.</p>
+    <p data-s="3">Condiciones de acceso diferentes: el Sisbén, por ejemplo, contempla un tratamiento protegido de datos personales.</p>
+    <p data-s="4">Cada modelo tiene requisitos propios y puede perder vigencia cuando cambian los datos que recibe.</p>
+    <p data-s="5">Procedencia incompleta y pasos manuales: cuesta repetir una ejecución o explicar un cambio. Lo documentan Paleyes et al. (2022) y Sculley et al. (2015), y el MinTIC advierte que publicar datos no basta.</p>
+    <p data-s="6">Son consecuencias posibles; no afirmamos que hayan ocurrido en nuestro proceso. El problema es operativo: no medimos inseguridad alimentaria ni proponemos un algoritmo; falta un proceso reproducible que una datos, modelos y resultados con su procedencia.</p>
+    <p class="tr">¿Qué hay hoy para esto?</p>
+  </template>
 </section>
 
 <!-- ═════════ 4 · LO QUE EXISTE Y EL VACÍO ═════════ -->
@@ -193,6 +215,13 @@
     </div>
   </div>
   <div class="vnote rv f" data-s="3"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Hipótesis de trabajo, acotada a las fuentes revisadas</span></div>
+  <template class="notes" data-time="1:10" data-key="Hasta donde llega nuestra revisión, hay herramientas para cada pieza, pero no una que reúna la cadena para datos públicos municipales de Colombia. Es una hipótesis de trabajo.">
+    <p data-s="0">Hay herramientas que cubren parte: MLflow y DVC registran y versionan; Martini y colaboradores (2022) estiman indicadores con aprendizaje automático; el Programa Mundial de Alimentos publica HungerMap LIVE. Las herramientas generales documentan por separado el versionado, el registro, parte de la incorporación de datos, los contratos de entrada y salida y el servicio por API.</p>
+    <p data-s="1">Las herramientas para datos colombianos documentan parte de la adquisición y de la homologación.</p>
+    <p data-s="2">En las fuentes revisadas no identificamos una solución que reúna estas piezas para datos municipales de Colombia, con comprobación de compatibilidad entre un dataset versionado y un modelo, y procedencia por resultado consultable por API.</p>
+    <p data-s="3">Lo planteamos como hipótesis de trabajo, acotada a esa revisión.</p>
+    <p class="tr">Ese vacío es lo que proponemos cerrar.</p>
+  </template>
 </section>
 
 <!-- ═════════ 5 · PROPUESTA ═════════ -->
@@ -223,6 +252,16 @@
     <div class="obj-chip rv z" data-s="6" data-i="3"><div class="ico"><svg class="i"><use href="#i-check-circle"/></svg></div><div><small>4</small>Validación con un caso de demostración</div></div>
   </div>
   <div class="propnote rv f" data-s="6"><span class="pill"><svg class="i"><use href="#i-target"/></svg>116 municipios · modelos ya entrenados · sin entrenamiento en la primera versión</span></div>
+  <template class="notes" data-time="0:55" data-key="Una plataforma reproducible que automatiza la integración de fuentes públicas y despliega modelos ya entrenados de forma versionada, sin depender del algoritmo.">
+    <p data-s="0">Proponemos una plataforma reproducible que automatice la integración de fuentes públicas y el despliegue versionado de modelos, independiente del algoritmo. Las fuentes públicas la alimentan.</p>
+    <p data-s="1">Cada conjunto de datos lleva una versión, y cada modelo también.</p>
+    <p data-s="2">Antes de ejecutar se comprueba la compatibilidad entre el dataset y el modelo.</p>
+    <p data-s="3">Cada modelo se ejecuta de forma aislada.</p>
+    <p data-s="4">El resultado se consulta por API.</p>
+    <p data-s="5">Y llega con su procedencia: por ejemplo, modelo v3 con datos v2024.1.</p>
+    <p data-s="6">Cuatro objetivos: arquitectura, ingesta y homologación para 116 municipios, despliegue con API y validación con un caso de demostración. La primera versión registra y ejecuta modelos ya entrenados; el entrenamiento no es parte del alcance.</p>
+    <p class="tr">Así funciona por dentro.</p>
+  </template>
 </section>
 
 <!-- ═════════ 6 · CÓMO FUNCIONA ═════════ -->
@@ -256,6 +295,13 @@
       <div class="chips"><span class="chip-p p">Período</span><span class="chip-p d">Versión de datos</span><span class="chip-p m">Versión de modelo</span></div>
     </div>
   </div>
+  <template class="notes" data-time="1:00" data-key="Antes de ejecutar se comprueba la compatibilidad, cada modelo corre aislado y cada resultado dice de qué datos y de qué modelo salió.">
+    <p data-s="0">El diseño tiene nueve bloques lógicos, en tres grupos. Datos: la ingesta guarda una copia con su fecha y su origen; la preparación homologa códigos, períodos y unidades y genera un reporte de calidad; el almacén guarda cada versión sin modificarla. Modelos: el registro guarda cada modelo ya entrenado con su ficha; la comprobación de compatibilidad cruza sus requisitos con el dataset, los municipios y el período; la ejecución corre cada modelo aislado. Acceso: la API, la interfaz web y un catálogo de metadatos y procedencia.</p>
+    <p data-s="1">Primera regla: se excluye el municipio inválido con su motivo y, si ninguno es válido, el modelo no se ejecuta.</p>
+    <p data-s="2">Segunda: un modelo que falla no cancela a los demás.</p>
+    <p data-s="3">Tercera: cada resultado trae su período y su naturaleza —estimación de un modelo, no cifra oficial— y queda enlazado con la versión de datos y de modelo. Es nuestra propuesta de diseño: falta validarla con la dirección y con investigadores reales.</p>
+    <p class="tr">¿Quién la usa y hasta dónde llega?</p>
+  </template>
 </section>
 
 <!-- ═════════ 7 · ROLES Y ALCANCE ═════════ -->
@@ -275,6 +321,12 @@
 
   <div class="out rv f" data-s="2"><span class="lbl">Fuera de la primera versión</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Entrenar en la plataforma</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Personal municipal como usuario</span><span class="no"><svg class="i"><use href="#i-ban"/></svg>Operación permanente</span></div>
   <div class="cmd rv z" data-s="2" data-i="2"><svg class="i"><use href="#i-terminal"/></svg><span><i>$</i> <b>docker compose up</b></span><small>una instalación, un comando, en un entorno limpio</small></div>
+  <template class="notes" data-time="0:50" data-key="Dos roles, un alcance por niveles y una instalación con un comando.">
+    <p data-s="0">Hay dos roles. El administrador configura las fuentes con archivos versionados, activa versiones y registra modelos. El investigador elige datos, municipios, período y modelos, y lee resultados con su procedencia, su historial y la exportación. La especificación describe once casos de uso.</p>
+    <p data-s="1">El alcance se ordena en tres niveles. Debe: al menos tres fuentes heterogéneas, dos modelos de familias distintas, comprobación de compatibilidad, ejecución aislada, API, procedencia e instalación en un entorno limpio. Debería: interfaz web delgada, exportación e historial con repetición. Podría: reentrenamiento, más fuentes y más pantallas.</p>
+    <p data-s="2">Quedan fuera el entrenamiento dentro de la plataforma, el personal municipal como usuario y la operación permanente después del trabajo de grado, que exigiría un acuerdo aparte. Se instala con un comando y se demuestra en un entorno limpio.</p>
+    <p class="tr">Todo esto ya está especificado.</p>
+  </template>
 </section>
 
 <!-- ═════════ 8 · LO ESPECIFICADO ═════════ -->
@@ -291,6 +343,12 @@
     <div class="tile t4 rv z" data-s="2"><b class="n" id="n5">0</b><span>ejes de estado del arte</span><div class="axes"><b style="--n:0">A</b><b style="--n:1">B</b><b style="--n:2">C</b><b style="--n:3">D</b><b style="--n:4">E</b></div></div>
   </div>
   <div class="specnote rv f" data-s="2"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Diseño y especificación · aún sin versión en ejecución</span></div>
+  <template class="notes" data-time="0:35" data-key="Tenemos estado del arte, anteproyecto y una especificación IEEE 830; lo que presentamos es el diseño, todavía sin una versión en ejecución.">
+    <p data-s="0">El trabajo tiene tres bases: estado del arte, anteproyecto y una especificación bajo IEEE 830. Son 48 requisitos funcionales: 38 esenciales y 10 condicionales.</p>
+    <p data-s="1">17 requisitos no funcionales y once casos de uso, con dos roles.</p>
+    <p data-s="2">Cinco ejes de estado del arte. En las fuentes inspeccionadas, los 116 códigos municipales coinciden con DIVIPOLA. Todavía no hay una versión en ejecución: presentamos el diseño y su especificación.</p>
+    <p class="tr">Falta decir cómo lo vamos a construir.</p>
+  </template>
 </section>
 
 <!-- ═════════ 9 · MÉTODO, PLAN Y ABIERTOS ═════════ -->
@@ -328,6 +386,12 @@
       <span class="open-chip"><b class="q">?</b>Validación con investigadores reales</span>
     </div>
   </div>
+  <template class="notes" data-time="1:10" data-key="Cuatro fases, una por objetivo; tres riesgos con su mitigación; y puntos abiertos que decimos como abiertos.">
+    <p data-s="0">La metodología tiene cuatro fases, una por objetivo específico: diseño; ingesta y homologación; registro, compatibilidad y API; validación. En la validación separamos la evaluación de la plataforma del desempeño predictivo de los modelos. El cronograma de referencia es de 40 semanas, dentro de un horizonte estimado de dos a tres semestres.</p>
+    <p data-s="1">Riesgos: cobertura de los 116 municipios, coincidencia de períodos y acceso, como el Sisbén. Mitigación: fuentes de acceso público confirmado y modelos de referencia propios; los insumos de otros equipos no son requisito.</p>
+    <p data-s="2">Puntos abiertos, dichos como abiertos: duración formal; alcance de los 116 y línea translocal, con la dirección; si un proyecto que construye una plataforma es admisible como monografía; el indicador exacto del caso; la herramienta de registro; la validación con investigadores reales. Nos interesa su criterio.</p>
+    <p class="tr">Para cerrar, lo que esperamos del proyecto.</p>
+  </template>
 </section>
 
 <!-- ═════════ 10 · IMPACTO Y CIERRE ═════════ -->
@@ -346,6 +410,11 @@
 
   <div class="endnote rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-alert"/></svg>Estimaciones de modelos, no cifras oficiales del DANE</span></div>
   <div class="thanks rv f" data-s="2" data-i="1"><span class="ap">Gracias.</span> Preguntas.</div>
+  <template class="notes" data-time="0:45" data-key="Los resultados son estimaciones de modelos y no sustituyen las cifras del DANE; proponemos un proceso en el que cada resultado municipal se pueda repetir y explicar.">
+    <p data-s="0">Para cerrar, lo que esperamos del proyecto: un proceso reproducible y trazable.</p>
+    <p data-s="1">El impacto es condicional, en cuatro ámbitos. En lo social, los resultados podrían apoyar el análisis territorial de los equipos municipales, sin que demos por asegurada su adopción. En lo institucional, dejaría una base documentada que los semilleros podrían reutilizar. En lo tecnológico, una base para registrar y ejecutar modelos ya entrenados sin reconstruir la ingesta. En lo académico, conservar versiones y procedencia facilitaría revisar y repetir resultados. Beneficiarios directos: investigadores, analistas y semilleros; indirectos, a mediano o largo plazo: equipos técnicos municipales.</p>
+    <p data-s="2">Los resultados de la plataforma son estimaciones de modelos y no sustituyen las cifras oficiales del DANE. Proponemos un proceso en el que cada resultado municipal se pueda repetir y explicar. Gracias por su atención. Quedamos atentos a sus preguntas.</p>
+  </template>
 </section>
 
 <!-- ═════════ RESPALDOS A–F ═════════ -->
@@ -358,6 +427,11 @@
     </div>
     <div class="bk-foot rv f" data-s="2"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>La herramienta de registro de modelos sigue abierta</span></div>
   </div>
+  <template class="notes" data-key="Registran y versionan, pero en lo revisado no cubren adquisición ni compatibilidad dataset–modelo." data-when="¿Por qué no usar MLflow y DVC?">
+    <p data-s="0">MLflow y DVC ya registran y versionan modelos y datos.</p>
+    <p data-s="1">En lo que revisamos, ninguna cubre la adquisición de datos públicos municipales ni la comprobación de compatibilidad contra un dataset versionado.</p>
+    <p data-s="2">La herramienta de registro de modelos sigue abierta; componer herramientas existentes es una opción, no una decisión.</p>
+  </template>
 </section>
 
 <section class="scene bk" id="s-resp-b" data-group="backup" data-title="Respaldo B · Por qué una plataforma" data-steps="2">
@@ -371,6 +445,11 @@
       </div>
     </div>
   </div>
+  <template class="notes" data-key="Su valor aparece cuando el trabajo se repite, no en la primera corrida." data-when="¿Para qué una plataforma con solo 116 municipios?">
+    <p data-s="0">El valor aparece al repetir: cada año, con más fuentes, con más modelos, con más personas.</p>
+    <p data-s="1">Para una sola corrida bastaría un cuaderno versionado con Git y DVC, que cubren parte.</p>
+    <p data-s="2">No prometemos ahorros de tiempo ni de errores: no están medidos.</p>
+  </template>
 </section>
 
 <section class="scene bk" id="s-resp-c" data-group="backup" data-title="Respaldo C · Quién la usa" data-steps="2">
@@ -384,6 +463,11 @@
       </div>
     </div>
   </div>
+  <template class="notes" data-key="Investigadores y analistas primero; el personal municipal es beneficiario indirecto." data-when="¿Quién usaría la plataforma?">
+    <p data-s="0">Usuarios directos: investigadores, analistas y semilleros que trabajan con datos municipales.</p>
+    <p data-s="1">El personal municipal queda fuera de la primera versión como usuario; se considera beneficiario indirecto, a mediano o largo plazo.</p>
+    <p data-s="2">La validación del flujo con investigadores reales está pendiente.</p>
+  </template>
 </section>
 
 <section class="scene bk" id="s-resp-d" data-group="backup" data-title="Respaldo D · Calidad de las predicciones" data-steps="2">
@@ -396,6 +480,11 @@
     </div>
     <div class="bk-foot rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-alert"/></svg>Los resultados son estimaciones de modelos, no cifras oficiales</span></div>
   </div>
+  <template class="notes" data-key="Evaluamos la plataforma, no el desempeño predictivo de los modelos." data-when="¿Qué tan precisos son los modelos?">
+    <p data-s="0">La evaluación se concentra en integración, trazabilidad, reproducibilidad, despliegue y usabilidad de la plataforma.</p>
+    <p data-s="1">Se distingue del desempeño predictivo de los modelos que se integren.</p>
+    <p data-s="2">Los resultados son estimaciones de modelos y no sustituyen las cifras oficiales.</p>
+  </template>
 </section>
 
 <section class="scene bk" id="s-resp-e" data-group="backup" data-title="Respaldo E · Viabilidad" data-steps="2">
@@ -411,6 +500,11 @@
       <span class="pill warn rv z" data-s="2"><svg class="i"><use href="#i-clock"/></svg>Horizonte estimado: dos a tres semestres · duración formal en revisión</span>
     </div>
   </div>
+  <template class="notes" data-key="El alcance se recorta por niveles y no incluye entrenar modelos." data-when="¿Se puede hacer en el tiempo y con dos personas?">
+    <p data-s="0">El alcance se ordena en debe, debería y podría, de modo que se puede recortar sin perder la demostración.</p>
+    <p data-s="1">La primera versión no entrena modelos.</p>
+    <p data-s="2">El horizonte de dos a tres semestres es una estimación del equipo; la duración formal está en revisión con la dirección.</p>
+  </template>
 </section>
 
 <section class="scene bk" id="s-resp-f" data-group="backup" data-title="Respaldo F · Hogares o personas" data-steps="2">
@@ -423,6 +517,11 @@
     </div>
     <div class="bk-foot rv f" data-s="2"><span class="pill"><svg class="i"><use href="#i-file"/></svg>Citamos solo el boletín del DANE, con su gráfico y su página</span></div>
   </div>
+  <template class="notes" data-key="Citamos el boletín del DANE; son hogares, no personas." data-when="¿Por qué 13,1 % y no 13,2 %? ¿Hogares o personas?">
+    <p data-s="0">El boletín FIES 2025 del DANE da 13,1 % (2025) y 22,6 % (2024), en hogares, Gráfico 4, p. 6.</p>
+    <p data-s="1">El indicador 2.1.2 del ODS 2 se define para personas y el boletín lo separa de las cifras de hogares.</p>
+    <p data-s="2">Por eso se cita solo el boletín.</p>
+  </template>
 </section>
 
 <!-- ═════════ NOTAS DE ESTUDIO (tecla N) ═════════ -->
