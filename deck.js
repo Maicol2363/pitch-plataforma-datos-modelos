@@ -37,8 +37,9 @@
   let step = 0;
   let returnTo = null;
 
-  /* ───── turnos: solo está decidido que A abre (1) y cierra (10). Para asignar el resto: { 2: 'B', ... } ───── */
-  const PRESENTER = { 1: 'A', 10: 'A' };
+  /* ───── turnos: A (violeta) presenta las escenas 1 a 4 y la 10. Las escenas 5 a 9 no tienen asignación y la barra las deja como están.
+     Para asignarlas, añadir por ejemplo 5: 'B' (ámbar) ───── */
+  const PRESENTER = { 1: 'A', 2: 'A', 3: 'A', 4: 'A', 10: 'A' };
   /* tiempo suggerido por escena (s) para el modo recorrido; suma 550 s = 9:10 */
   const BUDGET = [45, 40, 80, 70, 55, 60, 50, 35, 70, 45];
 

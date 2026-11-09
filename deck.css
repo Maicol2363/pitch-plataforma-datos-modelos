@@ -183,8 +183,10 @@ body:not([data-mode="backup"]) #progress-b { display: none; }
 .progress button:hover::before { background: var(--muted); }
 .progress button:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 4px; }
 /* turnos: cada tramo toma el color de quien presenta (se asigna en deck.js, PRESENTER) */
-.progress button[data-who="A"]::before { background: rgba(15, 118, 110, .3); opacity: 1; }
-.progress button[data-who="A"] i { background: var(--acc); }
+.progress button[data-who="A"]::before { background: rgba(91, 75, 219, .3); opacity: 1; }
+.progress button[data-who="A"] i { background: var(--ai); }
+body[data-theme="dark"] .progress button[data-who="A"]::before { background: rgba(139, 125, 242, .35); }
+body[data-theme="dark"] .progress button[data-who="A"] i { background: #8b7df2; }
 .progress button[data-who="B"]::before { background: rgba(217, 119, 6, .3); opacity: 1; }
 .progress button[data-who="B"] i { background: #d97706; }
 
