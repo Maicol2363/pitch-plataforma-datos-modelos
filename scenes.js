@@ -40,16 +40,15 @@
   })();
 
   /* ───────── 1 · portada: las cifras cuentan hacia arriba mientras crecen las barras ───────── */
+  // Cundinamarca, hogares, inseguridad alimentaria moderada o grave (DANE): 2022, 2023, 2024 y 2025
+  const SERIES = [['v22', 23.0], ['v23', 27.2], ['v24', 22.6], ['v25', 13.1]];
+  const paintSeries = () => SERIES.forEach(([id, v]) => { $('#' + id).textContent = dec1(v); });
   Deck.hook('s-portada', {
     enter() {
-      const a = $('#v24'), b = $('#v25');
-      count(a, 22.6, 1500, dec1);
-      setTimeout(() => count(b, 13.1, 1300, dec1), 400);
+      SERIES.forEach(([id, v], i) => setTimeout(() => count($('#' + id), v, 1100, dec1), 400 + i * 220));
     },
-    step(n, ctx) {
-      if (!ctx.animate && !ctx.entering) { $('#v24').textContent = '22,6 %'; $('#v25').textContent = '13,1 %'; }
-    },
-    reset() { $('#v24').textContent = '22,6 %'; $('#v25').textContent = '13,1 %'; },
+    step(n, ctx) { if (!ctx.animate && !ctx.entering) paintSeries(); },
+    reset: paintSeries,
   });
 
   /* ───────── 5 · propuesta: el nodo del paso brilla y la compatibilidad late desde que aparece ───────── */

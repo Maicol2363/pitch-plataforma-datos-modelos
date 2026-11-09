@@ -27,8 +27,8 @@
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ───────── 1 · portada: barras que respiran, delta que late, años sin dato que reclaman atención ───────── */
-.hk-delta { animation: deltap 3.2s ease-in-out infinite; }
-@keyframes deltap { 0%, 100% { box-shadow: 0 0 0 0 rgba(15, 118, 110, .0); } 50% { box-shadow: 0 0 0 12px rgba(15, 118, 110, .12); } }
+.dl.big::after { content: ""; position: absolute; inset: -3px; border-radius: 999px; border: 2px solid var(--acc); opacity: 0; pointer-events: none; animation: dlping 3.2s ease-out 3s infinite; }
+@keyframes dlping { 0% { opacity: .9; transform: scale(1); } 60%, 100% { opacity: 0; transform: scale(1.35); } }
 .hk-bar .b::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 60%); transform: translateY(-100%); animation: barshine 5s ease-in-out infinite; }
 @keyframes barshine { 0%, 50% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
 .yr.gap { animation: gapp 3.4s ease-in-out infinite; }
