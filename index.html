@@ -6,10 +6,10 @@
 <title>Plataforma reproducible de datos y despliegue de modelos · Presentación</title>
 <meta name="description" content="Presentación ante jurados: plataforma reproducible de datos y despliegue de modelos para el monitoreo municipal de inseguridad alimentaria en Cundinamarca.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="deck.css?v=202611091222">
-<link rel="stylesheet" href="scenes.css?v=202611091222">
-<link rel="stylesheet" href="idle.css?v=202611091222">
-<link rel="stylesheet" href="notes.css?v=202611091222">
+<link rel="stylesheet" href="deck.css?v=202611091342">
+<link rel="stylesheet" href="scenes.css?v=202611091342">
+<link rel="stylesheet" href="idle.css?v=202611091342">
+<link rel="stylesheet" href="notes.css?v=202611091342">
 </head>
 <body data-theme="light">
 
@@ -112,33 +112,34 @@
 <section class="scene" id="s-porque" data-title="Por qué importa" data-steps="2">
   <header class="hd rv f" data-s="0"><div class="eyebrow">El nivel que falta</div><h2 class="h2">La encuesta llega hasta el departamento</h2></header>
 
-  <div class="fies">
-    <div class="fies-card card rv" data-s="0">
-      <div class="lbl">Escala FIES · ECV</div>
-      <div class="q8"><i style="--n:0"></i><i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i></div>
-      <div class="big"><span class="ac">8</span> preguntas, <span class="ac">cada año</span></div>
-      <div class="yearline"><b></b><span></span><b></b><span></span><b></b><span></span><b></b></div>
+  <div class="axis">
+    <div class="axis-card card rv" data-s="0">
+      <div class="lbl">En el tiempo · 8 preguntas de la ECV</div>
+      <div class="ax-big"><span class="ac">Cada año</span></div>
+      <div class="yearline"><b style="--n:0"></b><span></span><b style="--n:1"></b><span></span><b style="--n:2"></b><span></span><b style="--n:3"></b></div>
       <div class="yearline-l"><span>2022</span><span>2023</span><span>2024</span><span>2025</span></div>
     </div>
-    <div class="pq-row rv" data-s="1">
-      <div class="pq"><div class="ico blue"><svg class="i"><use href="#i-home"/></svg></div><div><b>Hogares</b><span>las cifras del boletín</span></div></div>
-      <div class="pq-ne">≠</div>
-      <div class="pq"><div class="ico"><svg class="i"><use href="#i-user"/></svg></div><div><b>Personas</b><span>indicador 2.1.2 del ODS 2</span></div></div>
-    </div>
+    <div class="pill warn need rv" data-s="2"><svg class="i"><use href="#i-alert"/></svg>El DANE identificó la necesidad de información municipal</div>
+  </div>
+  <div class="s2-foot rv f" data-s="2">
+    <p>Cifras de hogares. El indicador 2.1.2 del ODS 2 se define para personas.</p>
+    <small>Fuente: DANE, boletín FIES 2025 (p. 2) y página de estadísticas experimentales.</small>
   </div>
 
-  <div class="zoom">
-    <div class="zoom-card card rv z" data-s="0" data-i="2">
-      <div class="lbl">La encuesta publica un número por departamento</div>
-      <div class="dept"><div><b>Cundinamarca</b><span>un solo valor por departamento</span></div></div>
-      <div class="mdots rv f" data-s="2" id="mdots"></div>
-      <div class="zoom-cap rv f" data-s="2"><span class="tag">Estimación en áreas pequeñas · 2022 y 2024</span><b>116 municipios</b></div>
+  <div class="mapc card rv z" data-s="0" data-i="2">
+    <div class="lbl">En el territorio · hasta el departamento</div>
+    <div class="cmap" id="cmap"></div>
+    <div class="map-lab"><b>Cundinamarca</b><span>un solo valor</span></div>
+    <div class="map-cap">
+      <b class="rv f" data-s="1">116 municipios</b>
+      <span class="tag rv f" data-s="2">Estimación en áreas pequeñas · 2022 y 2024</span>
     </div>
   </div>
+  <p class="map-src rv f" data-s="0">Mapa: DANE (2020) vía geoBoundaries, CC BY 4.0; municipios según DIVIPOLA.</p>
   <template class="notes" data-time="0:40" data-key="El indicador se mide cada año, pero la encuesta llega hasta el departamento; el municipio se cubre con estimación en áreas pequeñas.">
-    <p data-s="0">De FIES solo recordamos lo que usamos: ocho preguntas de la Encuesta Nacional de Calidad de Vida, incluidas desde 2022 y aplicadas cada año.</p>
-    <p data-s="1">El indicador 2.1.2 del ODS 2 se define para personas. Por eso el boletín del DANE lo separa de las cifras de hogares que acabamos de ver.</p>
-    <p data-s="2">Por el diseño de la encuesta, los indicadores se desagregan hasta el departamento. El DANE identificó la necesidad de información municipal y la cubre con estimación en áreas pequeñas, que combina la encuesta con información auxiliar, para 2022 y 2024. Cundinamarca tiene 116 municipios; la información a ese nivel es limitada y menos frecuente.</p>
+    <p data-s="0">De FIES solo usamos lo que necesitamos: ocho preguntas de la Encuesta Nacional de Calidad de Vida, incluidas desde 2022 y aplicadas cada año. Es decir, cada año hay una cifra para Cundinamarca.</p>
+    <p data-s="1">Pero, por el diseño de la encuesta, los indicadores se desagregan hasta el departamento. Cundinamarca tiene 116 municipios, y la cifra publicada no distingue entre ellos.</p>
+    <p data-s="2">El DANE identificó la necesidad de información municipal y la cubre con estimación en áreas pequeñas, que combina la encuesta con información auxiliar, para 2022 y 2024. A ese nivel la información es limitada y menos frecuente. Una precisión: son cifras de hogares; el indicador 2.1.2 del ODS 2 se define para personas, y el boletín del DANE las separa.</p>
     <p class="tr">Producir esas estimaciones exige reunir fuentes muy distintas, y de ahí sale el problema.</p>
   </template>
 </section>
@@ -557,7 +558,8 @@
 </div>
 
 <div class="sr" id="live" aria-live="polite"></div>
-<script src="deck.js?v=202611091222"></script>
-<script src="scenes.js?v=202611091222"></script>
+<script src="deck.js?v=202611091342"></script>
+<script src="cundinamarca.js?v=202611091342"></script>
+<script src="scenes.js?v=202611091342"></script>
 </body>
 </html>

@@ -12,15 +12,27 @@
   const int = (n) => String(Math.round(n));
 
   /* ───────── piezas que se generan al cargar ───────── */
-  // 2 · 116 municipios: una cuadrícula de 15 columnas (la última fila queda incompleta, como un mapa)
+  // 2 · los 116 municipios de Cundinamarca sobre su mapa (trazados en cundinamarca.js, generado por
+  // tools/build-map.mjs). Cada municipio es un trazado; --d ordena el encendido en diagonal, de arriba a la
+  // izquierda hacia abajo a la derecha. Bogotá, D. C. no es uno de los 116: va aparte, con borde punteado.
   (() => {
-    const box = $('#mdots');
-    if (!box) return;
-    for (let k = 0; k < 116; k++) {
-      const i = el('i');
-      i.style.setProperty('--d', (k % 15) + Math.floor(k / 15));
-      box.appendChild(i);
+    const box = $('#cmap'), C = window.CUNDI;
+    if (!box || !C) return;
+    const NS = 'http://www.w3.org/2000/svg';
+    const sv = (tag, attrs) => { const e = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v)); return e; };
+    const svg = sv('svg', { viewBox: `0 0 ${C.w} ${C.h}`, role: 'img', 'aria-label': 'Mapa de los 116 municipios de Cundinamarca' });
+    C.mpios.forEach((m) => {
+      const p = sv('path', { d: m.d, class: 'mp', 'fill-rule': 'evenodd', 'data-c': m.c });
+      p.style.setProperty('--d', Math.round((m.x / C.w + m.y / C.h) * 12));
+      svg.appendChild(p);
+    });
+    if (C.bogota) {
+      svg.appendChild(sv('path', { d: C.bogota.d, class: 'bog', 'fill-rule': 'evenodd' }));
+      const t = sv('text', { x: C.bogota.x, y: C.bogota.y - 4, class: 'bog-t' });
+      [['Bogotá', 0], ['D. C.', 15]].forEach(([w, dy]) => { const ts = sv('tspan', { x: C.bogota.x, dy }); ts.textContent = w; t.appendChild(ts); });
+      svg.appendChild(t);
     }
+    box.appendChild(svg);
   })();
 
   // 3 · frecuencias: Black Marble publica a menudo; FIES municipal, solo dos años

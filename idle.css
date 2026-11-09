@@ -37,11 +37,11 @@
 .yr.gap u { animation: qmark 2.4s ease-in-out infinite; }
 @keyframes qmark { 0%, 100% { opacity: .35; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.5); } }
 
-/* ───────── 2 · por qué importa: preguntas en ola, municipios que se encienden ───────── */
-.q8 i { animation: qwave 4s ease-in-out infinite; animation-delay: calc(var(--n) * .18s); }
-@keyframes qwave { 0%, 70%, 100% { background: var(--acc-s); transform: scale(1); } 15%, 30% { background: var(--acc); transform: scale(1.35); } }
-.mdots i { animation: msweep 7s ease-in-out infinite; animation-delay: calc(var(--d) * 70ms); }
-@keyframes msweep { 0%, 14%, 100% { background: var(--line2); transform: scale(1); } 5%, 9% { background: var(--acc); transform: scale(1.5); } }
+/* ───────── 2 · por qué importa: los años laten en fila; los municipios se encienden en diagonal ───────── */
+.yearline b { animation: ypulse 4s ease-in-out infinite; animation-delay: calc(var(--n) * .45s); }
+@keyframes ypulse { 0%, 60%, 100% { transform: scale(1); box-shadow: 0 0 0 5px var(--acc-s); } 15%, 30% { transform: scale(1.3); box-shadow: 0 0 0 9px var(--acc-s); } }
+.scene:is([data-step="1"], [data-step="2"]) .mp { animation: mpwave 7s ease-in-out infinite; animation-delay: calc(1.8s + var(--d) * 110ms); }
+@keyframes mpwave { 0%, 11%, 100% { fill: var(--cell); transform: scale(1); } 4%, 7% { fill: var(--acc); transform: scale(1.06); } }
 
 /* ───────── 3 · problema: carriles que no coinciden ───────── */
 .lane .scan { animation: scan 5.5s linear infinite; }
