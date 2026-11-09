@@ -119,18 +119,18 @@
 
 /* ───────── 4 · lo que existe y el vacío ───────── */
 .vcs { position: absolute; left: 72px; top: 176px; width: 1136px; display: flex; gap: 28px; }
-.vc { flex: 1; height: 384px; padding: 24px 24px 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-s); position: relative; }
+.vc { flex: 1; height: 412px; padding: 24px 24px 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-s); position: relative; }
 .vc h3 { margin: 14px 0 4px; font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
-.vc .sub { font-size: 14px; color: var(--muted); }
+.vc .sub { font-size: 14px; line-height: 1.35; min-height: 38px; color: var(--muted); }
 .vc ul { margin-top: 14px; display: grid; gap: 8px; }
 .vc li { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; background: var(--soft); font-size: 16px; font-weight: 600; }
 .vc li .i { width: 18px; height: 18px; color: var(--acc); }
-.vc li em { margin-left: auto; font-style: normal; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.vc li em { margin-left: auto; font-style: normal; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .vc.gap { border: 2px dashed var(--warn-l); background: var(--warn-s); }
 .vc.gap li { background: rgba(255, 255, 255, .7); }
 .vc.gap li .i { color: var(--warn); }
 body[data-theme="dark"] .vc.gap li { background: rgba(0, 0, 0, .25); }
-.vnote { position: absolute; left: 72px; top: 590px; }
+.vnote { position: absolute; left: 72px; top: 610px; }
 
 /* ───────── 5 · propuesta ───────── */
 .pipe { position: absolute; left: 72px; top: 178px; width: 1136px; height: 190px; }
@@ -299,3 +299,28 @@ body[data-theme="dark"] .bk-card.no li { background: rgba(0, 0, 0, .25); }
 .vs { align-self: center; font-size: 26px; font-weight: 800; color: var(--muted); }
 .fig { font-size: 64px; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--acc); }
 .fig small { font-size: 18px; letter-spacing: 0; color: var(--muted); font-weight: 600; margin-left: 8px; }
+
+/* ───────── respaldos G a I: tabla de herramientas con su fuente ───────── */
+.tt { position: absolute; left: 72px; top: 160px; width: 1136px; display: grid; gap: 8px; }
+.tt-h, .tt-r { display: grid; grid-template-columns: 220px repeat(var(--c, 5), var(--w, 104px)) 1fr; gap: 10px; align-items: center; }
+.tt-h { padding: 0 16px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); line-height: 1.2; }
+.tt-h span:not(:first-child):not(:last-child) { text-align: center; }
+.tt-r { padding: 8px 16px; min-height: 66px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-s); }
+.tt-n b { display: block; font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
+.tt-n .src { display: block; margin-top: 1px; font-size: 12px; color: var(--muted); }
+.tt-n a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--line2); }
+.tt-n a:hover { color: var(--acc); border-bottom-color: var(--acc); }
+.tt-l { margin: 0; font-size: 13.5px; line-height: 1.3; color: var(--ink2); }
+.tt-nv { font-weight: 700; }
+.m { display: block; box-sizing: border-box; justify-self: center; width: 20px; height: 20px; border-radius: 50%; }
+.m.y { background: var(--acc); }
+.m.p { border: 2px solid var(--acc); background: linear-gradient(90deg, var(--acc) 50%, transparent 50%); }
+.m.n { width: 16px; height: 3px; border-radius: 2px; background: var(--line2); }
+.tt.i .tt-h, .tt.i .tt-r { grid-template-columns: 230px 1.3fr 150px 1fr; }
+.tt.i .tt-h span { text-align: left; }
+.tt.i .tt-r { min-height: 84px; }
+.tt-key { position: absolute; left: 72px; top: 590px; width: 1136px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-size: 13px; color: var(--ink2); }
+.tt-key .m { display: inline-block; vertical-align: -4px; margin-right: 6px; width: 16px; height: 16px; }
+.tt-key .m.n { width: 14px; height: 3px; vertical-align: 3px; }
+.tt-by { margin-left: auto; font-size: 12px; color: var(--muted); }
+.tt-foot { position: absolute; left: 72px; top: 618px; }

@@ -6,10 +6,10 @@
 <title>Plataforma reproducible de datos y despliegue de modelos · Presentación</title>
 <meta name="description" content="Presentación ante jurados: plataforma reproducible de datos y despliegue de modelos para el monitoreo municipal de inseguridad alimentaria en Cundinamarca.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="deck.css?v=202611092018">
-<link rel="stylesheet" href="scenes.css?v=202611092018">
-<link rel="stylesheet" href="idle.css?v=202611092018">
-<link rel="stylesheet" href="notes.css?v=202611092018">
+<link rel="stylesheet" href="deck.css?v=202611092339">
+<link rel="stylesheet" href="scenes.css?v=202611092339">
+<link rel="stylesheet" href="idle.css?v=202611092339">
+<link rel="stylesheet" href="notes.css?v=202611092339">
 </head>
 <body data-theme="light">
 
@@ -186,12 +186,12 @@
 
 <!-- ═════════ 4 · LO QUE EXISTE Y EL VACÍO ═════════ -->
 <section class="scene" id="s-vacio" data-title="Qué existe y dónde está el vacío" data-steps="3">
-  <header class="hd rv f" data-s="0"><div class="eyebrow">Estado del arte</div><h2 class="h2">Cada pieza existe por separado</h2></header>
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Estado del arte</div><h2 class="h2">Hay piezas sueltas; falta reunirlas</h2></header>
 
   <div class="vcs">
     <div class="vc rv z" data-s="0">
       <div class="ico blue"><svg class="i"><use href="#i-layers"/></svg></div>
-      <h3>Herramientas generales</h3><div class="sub">p. ej. MLflow, DVC</div>
+      <h3>Herramientas generales</h3><div class="sub">DVC · MLflow · Kubeflow Hub · KServe · BentoML</div>
       <ul>
         <li><svg class="i"><use href="#i-check"/></svg>Versionado de datos y modelos</li>
         <li><svg class="i"><use href="#i-check"/></svg>Registro de versiones</li>
@@ -202,7 +202,7 @@
     </div>
     <div class="vc rv z" data-s="1">
       <div class="ico"><svg class="i"><use href="#i-globe"/></svg></div>
-      <h3>Para datos colombianos</h3><div class="sub">adquisición y homologación</div>
+      <h3>Datos públicos</h3><div class="sub">ColOpenData · DIVIPOLA · IPUMS GEO2_CO · tejoR · SDMX</div>
       <ul>
         <li><svg class="i"><use href="#i-check"/></svg>Adquisición<em>parte</em></li>
         <li><svg class="i"><use href="#i-check"/></svg>Homologación<em>parte</em></li>
@@ -220,8 +220,8 @@
   </div>
   <div class="vnote rv f" data-s="3"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Hipótesis de trabajo, acotada a las fuentes revisadas</span></div>
   <template class="notes" data-time="1:10" data-key="Hasta donde llega nuestra revisión, hay herramientas para cada pieza, pero no una que reúna la cadena para datos públicos municipales de Colombia. Es una hipótesis de trabajo.">
-    <p data-s="0">Hay herramientas que cubren parte: MLflow y DVC registran y versionan; Martini y colaboradores (2022) estiman indicadores con aprendizaje automático; el Programa Mundial de Alimentos publica HungerMap LIVE. Las herramientas generales documentan por separado el versionado, el registro, parte de la incorporación de datos, los contratos de entrada y salida y el servicio por API.</p>
-    <p data-s="1">Las herramientas para datos colombianos documentan parte de la adquisición y de la homologación.</p>
+    <p data-s="0">Empecemos por las herramientas generales: DVC, MLflow, Kubeflow Hub, KServe y BentoML. Cada una documenta solo una parte: el versionado de datos y modelos, el registro de versiones, los contratos de entrada y salida y el servicio por API; de la incorporación de datos, apenas una parte.</p>
+    <p data-s="1">Para datos públicos y territoriales hay ColOpenData, DIVIPOLA, IPUMS GEO2_CO, tejoR y SDMX, que documentan parte de la adquisición y parte de la homologación.</p>
     <p data-s="2">En las fuentes revisadas no identificamos una solución que reúna estas piezas para datos municipales de Colombia, con comprobación de compatibilidad entre un dataset versionado y un modelo, y procedencia por resultado consultable por API.</p>
     <p data-s="3">Lo planteamos como hipótesis de trabajo, acotada a esa revisión.</p>
     <p class="tr">Ese vacío es lo que proponemos cerrar.</p>
@@ -421,7 +421,7 @@
   </template>
 </section>
 
-<!-- ═════════ RESPALDOS A–F ═════════ -->
+<!-- ═════════ RESPALDOS A–I ═════════ -->
 <section class="scene bk" id="s-resp-a" data-group="backup" data-title="Respaldo A · MLflow y DVC" data-steps="2">
   <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo A</div><h2 class="h2">¿Por qué no MLflow y DVC?</h2></header>
   <div class="bk-wrap">
@@ -528,6 +528,58 @@
   </template>
 </section>
 
+<section class="scene bk" id="s-resp-g" data-group="backup" data-title="Respaldo G · Plataformas y servicio" data-steps="1">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo G · plataformas y servicio</div><h2 class="h2">¿Qué hace cada herramienta?</h2></header>
+  <div class="tt" style="--c:5;--w:104px">
+    <div class="tt-h rv f" data-s="0"><span>Herramienta</span><span>Datos<br>versionados</span><span>Modelos<br>versionados</span><span>Contrato<br>entrada y salida</span><span>Servicio<br>por API</span><span>Incorpora<br>datos</span><span>Límite documentado</span></div>
+    <div class="tt-r rv" data-s="0" data-i="1"><div class="tt-n"><b>DVC</b><span class="src"><a href="https://doc.dvc.org/example-scenarios/versioning-data-and-models" target="_blank" rel="noopener">doc.dvc.org</a> ↗</span></div><span class="m y" role="img" aria-label="documentado"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><p class="tt-l">Sin API de predicción, contrato de entrada y salida ni procedencia de cada resultado servido.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="2"><div class="tt-n"><b>MLflow</b><span class="src"><a href="https://mlflow.org/docs/latest/ml/model-registry/" target="_blank" rel="noopener">registro</a> · <a href="https://mlflow.org/docs/latest/ml/model/signatures/" target="_blank" rel="noopener">firmas</a> · <a href="https://mlflow.org/docs/latest/ml/tracking/" target="_blank" rel="noopener">seguimiento</a> ↗</span></div><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><p class="tt-l">Valida estructura y tipos, no contra datos versionados; sirve en local; no restaura versiones de los datos.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="3"><div class="tt-n"><b>Kubeflow Hub</b><span class="src"><a href="https://www.kubeflow.org/docs/components/hub/overview/" target="_blank" rel="noopener">kubeflow.org</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><p class="tt-l">Registro pasivo de metadatos; la predicción corre en KServe.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="4"><div class="tt-n"><b>KServe V2</b><span class="src"><a href="https://kserve.github.io/website/docs/concepts/architecture/data-plane/v2-protocol" target="_blank" rel="noopener">kserve.github.io</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><p class="tt-l">Contrato en tensores, sin esquemas tabulares; no registra modelos ni datos.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="5"><div class="tt-n"><b>BentoML</b><span class="src"><a href="https://docs.bentoml.com/en/latest/build-with-bentoml/iotypes.html" target="_blank" rel="noopener">docs.bentoml.com</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m y" role="img" aria-label="documentado"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><p class="tt-l">El esquema vive en el código del servicio; no trata versionado ni procedencia.</p></div>
+  </div>
+  <div class="tt-key rv f" data-s="0"><span><i class="m y"></i> documentado</span><span><i class="m p"></i> documentado en parte</span><span><i class="m n"></i> no descrito en lo revisado</span><span class="tt-by">Elaboración propia a partir de la documentación citada. «No descrito» no significa «no existe».</span></div>
+  <div class="tt-foot rv f" data-s="1"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>En lo revisado, ninguna comprueba la compatibilidad con un dataset versionado ni da procedencia por resultado</span></div>
+  <template class="notes" data-key="Ninguna herramienta documenta por sí sola toda la cadena: DVC versiona datos y modelos; MLflow y Kubeflow Hub registran modelos; KServe y BentoML sirven por API; MLflow, KServe y BentoML declaran contratos de entrada y salida." data-when="¿Cuáles herramientas hacen versionado de datos, servicio por API o contratos de entrada y salida? ¿Qué es eso que ya existe?">
+    <p data-s="0">Versionado de datos: DVC, que versiona datos y modelos junto con el código y restaura versiones anteriores; MLflow solo registra metadatos de los conjuntos de datos. Versiones de modelos: MLflow, con alias y vínculo a la ejecución que las produjo, y Kubeflow Hub, que es un registro. Contratos de entrada y salida: la firma de modelo de MLflow, los metadatos de KServe y los tipos de BentoML. Servicio por API: KServe, por HTTP y gRPC, y BentoML.</p>
+    <p data-s="1">En lo revisado, ninguna comprueba la compatibilidad contra un dataset versionado ni asocia cada resultado con su procedencia.</p>
+  </template>
+</section>
+
+<section class="scene bk" id="s-resp-h" data-group="backup" data-title="Respaldo H · Datos públicos y territoriales" data-steps="1">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo H · datos públicos y territoriales</div><h2 class="h2">¿Y para datos públicos de Colombia?</h2></header>
+  <div class="tt" style="--c:3;--w:116px">
+    <div class="tt-h rv f" data-s="0"><span>Herramienta</span><span>Adquisición</span><span>Homologación</span><span>Municipios<br>de Colombia</span><span>Límite documentado</span></div>
+    <div class="tt-r rv" data-s="0" data-i="1"><div class="tt-n"><b>ColOpenData</b><span class="src">Tavera y Otero (2025) · <a href="https://doi.org/10.32614/CRAN.package.ColOpenData" target="_blank" rel="noopener">CRAN</a> ↗</span></div><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m y" role="img" aria-label="documentado"></span><p class="tt-l">Descarga de una copia en un servidor privado; sin actualización periódica ni versiones.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="2"><div class="tt-n"><b>DIVIPOLA</b><span class="src"><a href="https://www.dane.gov.co/files/nomenclaturas/ingles/Methodology%20for%20the%20Codification%20of%20the%20Political-Administrative%20Division%20of%20Colombia.pdf" target="_blank" rel="noopener">dane.gov.co</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m y" role="img" aria-label="documentado"></span><p class="tt-l">Documento metodológico del DANE: sin interfaz programática ni conciliación de períodos o formatos.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="3"><div class="tt-n"><b>IPUMS GEO2_CO</b><span class="src"><a href="https://international.ipums.org/international-action/variables/GEO2_CO" target="_blank" rel="noopener">ipums.org</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m p" role="img" aria-label="documentado en parte"></span><p class="tt-l">Límites consistentes de 1973 a 2005; no corresponden uno a uno con el listado oficial.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="4"><div class="tt-n"><b>tejoR</b><span class="src">Gutierrez (2026) · <a href="https://doi.org/10.32614/CRAN.package.tejoR" target="_blank" rel="noopener">CRAN</a> ↗</span></div><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m p" role="img" aria-label="documentado en parte"></span><p class="tt-l">Paquete beta; su único caso colombiano es intraurbano (Bogotá).</p></div>
+    <div class="tt-r rv" data-s="0" data-i="5"><div class="tt-n"><b>SDMX</b><span class="src">Willekens (2023) · <a href="https://doi.org/10.4054/DemRes.2023.49.40" target="_blank" rel="noopener">DOI</a> ↗</span></div><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m p" role="img" aria-label="documentado en parte"></span><span class="m n" role="img" aria-label="no descrito en lo revisado"></span><p class="tt-l">Acceso por API a proveedores internacionales; sin proveedores colombianos.</p></div>
+  </div>
+  <div class="tt-key rv f" data-s="0"><span><i class="m y"></i> documentado</span><span><i class="m p"></i> documentado en parte</span><span><i class="m n"></i> no descrito en lo revisado</span><span class="tt-by">Elaboración propia a partir de la documentación citada. «No descrito» no significa «no existe».</span></div>
+  <div class="tt-foot rv f" data-s="1"><span class="pill warn"><svg class="i"><use href="#i-alert"/></svg>Cada una cubre una parte; en lo revisado, ninguna llega al resultado con su procedencia</span></div>
+  <template class="notes" data-key="Para datos públicos y territoriales hay piezas parciales: ColOpenData descarga datos del DANE y del IDEAM; DIVIPOLA, IPUMS GEO2_CO y tejoR homologan códigos y territorios; SDMX da acceso programático a datos de otros países." data-when="¿Qué hay para datos colombianos? ¿Y DIVIPOLA o ColOpenData?">
+    <p data-s="0">ColOpenData descarga datos del DANE y del IDEAM con alcance municipal, de una copia en un servidor privado. DIVIPOLA es el sistema oficial de códigos de departamentos y municipios. IPUMS GEO2_CO da límites municipales consistentes de 1973 a 2005. tejoR traslada series entre zonificaciones; su único caso colombiano es intraurbano. SDMX da acceso por API a datos de otros países y no incluye proveedores colombianos.</p>
+    <p data-s="1">Cada una cubre una parte de la adquisición o de la homologación; en lo revisado, ninguna llega hasta el resultado con su procedencia.</p>
+  </template>
+</section>
+
+<section class="scene bk" id="s-resp-i" data-group="backup" data-title="Respaldo I · Estimación de inseguridad alimentaria" data-steps="1">
+  <header class="hd rv f" data-s="0"><div class="eyebrow">Respaldo I · medición y estimación</div><h2 class="h2">¿Quién estima inseguridad alimentaria hoy?</h2></header>
+  <div class="tt i">
+    <div class="tt-h rv f" data-s="0"><span>Fuente</span><span>Qué hace</span><span>Nivel</span><span>Límite documentado</span></div>
+    <div class="tt-r rv" data-s="0" data-i="1"><div class="tt-n"><b>Nota municipal FIES, DANE</b><span class="src"><a href="https://www.dane.gov.co/files/operaciones/FIES/met-FIES-Municipal-2022.pdf" target="_blank" rel="noopener">nota</a> · <a href="https://sitios.dane.gov.co/EstimacionesModeloSAE/" target="_blank" rel="noopener">visor</a> ↗</span></div><p class="tt-l">Estima por municipio la inseguridad alimentaria moderada o grave de 2022, con un modelo de área calibrado con las cifras departamentales.</p><p class="tt-l tt-nv">Municipios del país</p><p class="tt-l">Documento metodológico de un año y un indicador; no es una plataforma.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="2"><div class="tt-n"><b>Áreas pequeñas, Colombia</b><span class="src">Ortiz-Rico (2024) · <a href="https://doi.org/10.15446/rce.v47n2.112779" target="_blank" rel="noopener">DOI</a> ↗</span></div><p class="tt-l">Revisa la estimación en áreas pequeñas en Colombia por campos: pruebas educativas, ingreso, salud.</p><p class="tt-l tt-nv">—</p><p class="tt-l">Revisión narrativa; no incluye inseguridad alimentaria ni aprendizaje automático.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="3"><div class="tt-n"><b>HungerMap LIVE, PMA</b><span class="src">Wobcke et al. (2022) · <a href="https://doi.org/10.1080/02681102.2022.2092438" target="_blank" rel="noopener">DOI</a> ↗</span></div><p class="tt-l">Tablero con estimaciones para más de 90 países, según el PMA; usa aprendizaje automático donde no hay encuesta.</p><p class="tt-l tt-nv">Primera división administrativa</p><p class="tt-l">Describe la versión de 2022; no menciona Colombia.</p></div>
+    <div class="tt-r rv" data-s="0" data-i="4"><div class="tt-n"><b>Martini et al.</b><span class="src">Nature Food (2022) · <a href="https://doi.org/10.1038/s43016-022-00587-8" target="_blank" rel="noopener">DOI</a> ↗</span></div><p class="tt-l">Usa aprendizaje automático para guiar acciones de seguridad alimentaria cuando faltan datos primarios.</p><p class="tt-l tt-nv">—</p><p class="tt-l">Fuera de la comparación de capacidades.</p></div>
+  </div>
+  <div class="tt-foot rv f" data-s="1"><span class="pill"><svg class="i"><use href="#i-target"/></svg>Ellos estiman; el proyecto no estima: ejecuta de forma versionada modelos ya entrenados</span></div>
+  <template class="notes" data-key="Estiman inseguridad alimentaria; el proyecto no la estima: ejecuta de forma versionada modelos ya entrenados." data-when="¿Ya hay quien estime inseguridad alimentaria por municipio? ¿HungerMap, Martini, el DANE?">
+    <p data-s="0">El DANE publicó una nota metodológica de la estimación municipal de 2022 y estimaciones municipales de 2022 y 2024. Una revisión de la estimación en áreas pequeñas en Colombia no incluye inseguridad alimentaria. HungerMap LIVE, del Programa Mundial de Alimentos, publica estimaciones para más de 90 países, según el PMA, en la primera división administrativa. Martini y colaboradores (2022) usan aprendizaje automático para guiar acciones de seguridad alimentaria donde faltan datos primarios.</p>
+    <p data-s="1">Nuestro proyecto no estima inseguridad alimentaria ni propone un algoritmo: ejecuta de forma versionada modelos ya entrenados.</p>
+  </template>
+</section>
+
 <!-- ═════════ NOTAS DE ESTUDIO (tecla N) ═════════ -->
 <aside class="notes-modal" id="notes" role="dialog" aria-label="Notas de estudio" aria-hidden="true">
   <header>
@@ -552,14 +604,14 @@
     <span class="count" id="count">01 / 10</span>
   </span>
 </div>
-<div class="hint" id="hint">→ avanzar · A–F respaldo · V movimiento · F pantalla completa</div>
+<div class="hint" id="hint">→ avanzar · A–I respaldo · V movimiento · F pantalla completa</div>
 
 </main>
 </div>
 
 <div class="sr" id="live" aria-live="polite"></div>
-<script src="deck.js?v=202611092018"></script>
-<script src="cundinamarca.js?v=202611092018"></script>
-<script src="scenes.js?v=202611092018"></script>
+<script src="deck.js?v=202611092339"></script>
+<script src="cundinamarca.js?v=202611092339"></script>
+<script src="scenes.js?v=202611092339"></script>
 </body>
 </html>

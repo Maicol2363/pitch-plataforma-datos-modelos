@@ -6,7 +6,7 @@
 
    Dos grupos de escenas:
    · principal (las diez de la exposición): → ← avanzan y retroceden
-   · respaldo (data-group="backup", letras A–F): se abren con A–F
+   · respaldo (data-group="backup", letras A–I): se abren con A–I (el F, con Mayús+F: la F sola es pantalla completa)
      y se cierran con Esc o R, que devuelven al punto de la exposición.
    ============================================================ */
 (() => {
@@ -55,7 +55,7 @@
     's-portada': {},
     's-porque': { 0: 2800, 1: 2800, 2: 3400 },
     's-problema': { 0: 2400, 1: 6500, 2: 11000, 3: 6500, 4: 6500, 5: 16000 }, // una fila por frase del guion (~2,5 palabras por segundo)
-    's-vacio': { 0: 3000, 1: 2800, 2: 3400, 3: 2400 },
+    's-vacio': { 0: 17000, 1: 10000, 2: 15000, 3: 4000 }, // un paso por párrafo del guion (~2,5 palabras por segundo)
     's-propuesta': { 0: 2000, 1: 2000, 2: 2000, 3: 2000, 4: 2000, 5: 2400, 6: 3200 },
     's-funciona': { 0: 2600, 1: 4200, 2: 4200, 3: 3400 },
     's-alcance': { 0: 3000, 1: 3600, 2: 3400 },
@@ -416,6 +416,7 @@
     else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
     else if (k === 'Home') { e.preventDefault(); go(isBackup(cur) ? mainCount : 0, 0); }
     else if (k === 'End') { e.preventDefault(); go(isBackup(cur) ? scenes.length - 1 : mainCount - 1, 0); }
+    else if (k === 'F' && e.shiftKey) openBackup(5); // Mayús+F: respaldo F (F sola es pantalla completa)
     else if (k === 'f' || k === 'F') {
       if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
     } else if (e.shiftKey && (k === 'p' || k === 'P')) toggleTour();
@@ -425,7 +426,7 @@
     else if (/^[0-9]$/.test(k)) {
       const n = k === '0' ? 9 : +k - 1;
       if (n < mainCount) go(n, 0);
-    } else if (/^[a-fA-F]$/.test(k)) openBackup(k.toLowerCase().charCodeAt(0) - 97);
+    } else if (/^[a-eg-iA-EG-I]$/.test(k)) openBackup(k.toLowerCase().charCodeAt(0) - 97);
     else if (k === 'Escape') { if (notesOpen) toggleNotes(false); else closeBackup(); }
     else if (k === 'r' || k === 'R') closeBackup();
     else return;
@@ -462,7 +463,7 @@
 
   /* ───── arranque: #3, #3/2, #a o #b/2 ───── */
   function fromHash() {
-    const m = location.hash.match(/^#(?:(\d+)|([a-fA-F]))(?:\/(\d+))?$/);
+    const m = location.hash.match(/^#(?:(\d+)|([a-iA-I]))(?:\/(\d+))?$/);
     if (!m) return [0, 0];
     const s = +m[3] || 0;
     if (m[2]) return [Math.min(mainCount + m[2].toLowerCase().charCodeAt(0) - 97, scenes.length - 1), s];
