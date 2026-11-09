@@ -39,7 +39,7 @@
   (() => {
     const r1 = $('#trk1'), r2 = $('#trk2');
     if (!r1 || !r2) return;
-    const pos = (x) => `left:calc(112px + (100% - 112px) * ${x})`;
+    const pos = (x) => `left:calc(150px + (100% - 150px) * ${x})`;
     for (let k = 0; k < 28; k++) r1.appendChild(el('span', 'tk', pos((k / 27).toFixed(3))));
     [0.18, 0.62].forEach((x) => r2.appendChild(el('span', 'tk big', pos(x))));
   })();

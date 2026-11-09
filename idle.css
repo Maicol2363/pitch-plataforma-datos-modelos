@@ -45,10 +45,10 @@
 
 /* ───────── 3 · problema: carriles que no coinciden ───────── */
 .lane .scan { animation: scan 5.5s linear infinite; }
-@keyframes scan { 0% { left: 0; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes scan { 0% { left: 150px; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { left: 100%; opacity: 0; } } /* 150 px: la barrida empieza después de las etiquetas de cada fila */
 .lane.lk .i { animation: lockp 2.6s ease-in-out infinite; }
 @keyframes lockp { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.25) rotate(-8deg); } }
-.ver b.old { animation: fadeold 5s ease-in-out infinite; }
+.ver .mod { animation: fadeold 5s ease-in-out infinite; }
 @keyframes fadeold { 0%, 55%, 100% { opacity: 1; } 75%, 90% { opacity: .25; } }
 .chain .brk { animation: brk 2.8s ease-in-out infinite; }
 @keyframes brk { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-5px) rotate(8deg); } }
