@@ -6,7 +6,7 @@
 
    Dos grupos de escenas:
    · principal (las diez de la exposición): → ← avanzan y retroceden
-   · respaldo (data-group="backup", letras A–I): se abren con A–I (el F, con Mayús+F: la F sola es pantalla completa)
+   · respaldo (data-group="backup", letras A–J): se abren con A–J (el F, con Mayús+F: la F sola es pantalla completa)
      y se cierran con Esc o R, que devuelven al punto de la exposición.
    ============================================================ */
 (() => {
@@ -426,7 +426,7 @@
     else if (/^[0-9]$/.test(k)) {
       const n = k === '0' ? 9 : +k - 1;
       if (n < mainCount) go(n, 0);
-    } else if (/^[a-eg-iA-EG-I]$/.test(k)) openBackup(k.toLowerCase().charCodeAt(0) - 97);
+    } else if (/^[a-eg-jA-EG-J]$/.test(k)) openBackup(k.toLowerCase().charCodeAt(0) - 97);
     else if (k === 'Escape') { if (notesOpen) toggleNotes(false); else closeBackup(); }
     else if (k === 'r' || k === 'R') closeBackup();
     else return;
@@ -463,7 +463,7 @@
 
   /* ───── arranque: #3, #3/2, #a o #b/2 ───── */
   function fromHash() {
-    const m = location.hash.match(/^#(?:(\d+)|([a-iA-I]))(?:\/(\d+))?$/);
+    const m = location.hash.match(/^#(?:(\d+)|([a-jA-J]))(?:\/(\d+))?$/);
     if (!m) return [0, 0];
     const s = +m[3] || 0;
     if (m[2]) return [Math.min(mainCount + m[2].toLowerCase().charCodeAt(0) - 97, scenes.length - 1), s];
